@@ -1,7 +1,7 @@
 class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
-        List<Integer> list = new ArrayList<>();
-        List<Integer> ans = new ArrayList<>();
+        Map<Integer, Integer> soldierRowMap = new HashMap<>();
+        int[] ans = new int[k];
         for(int i = 0 ; i < mat.length; i++){
             int count = 0;
             for(int j = 0; j < mat[i].length; j++){
@@ -9,22 +9,23 @@ class Solution {
                     count++;
                 }
             }
-            list.add(count);
+            soldierRowMap.put(i, count);
         }
 
-        List<Integer> indices = new ArrayList<>();
-        for (int i = 0; i < mat.length; i++) {
-            indices.add(i);
+        for(int i = 0; i< k; i++){
+        int min = mat[0].length + 1;
+        int minKey = -1;
+            for(int j = 0; j< mat.length; j++){
+            Integer count = soldierRowMap.get(j);
+                if (count != null && count < min) {
+                    min = count;
+                    minKey = j;
+                }
+        }
+        ans[i] = minKey;
+        soldierRowMap.remove(minKey);
         }
         
-        Collections.sort(indices, (a, b) -> Integer.compare(list.get(a), list.get(b)));
-
-        for (int i = 0; i < k; i++) {
-            ans.add(i,indices.get(i));
-        }
-
-        int[] array = ans.stream().mapToInt(Integer::intValue).toArray();
-
-        return array;
+        return ans;
     }
 }

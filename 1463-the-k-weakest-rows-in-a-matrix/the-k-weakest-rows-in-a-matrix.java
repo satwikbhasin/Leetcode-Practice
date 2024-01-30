@@ -1,31 +1,47 @@
 class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
-        Map<Integer, Integer> soldierRowMap = new HashMap<>();
+        Map<Integer, Integer> soldierCountMap = new HashMap<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
         int[] ans = new int[k];
+        int count = -1;
         for(int i = 0 ; i < mat.length; i++){
-            int count = 0;
-            for(int j = 0; j < mat[i].length; j++){
-                if(mat[i][j] == 1){
-                    count++;
+            int left = 0;
+            int right = mat[i].length - 1;
+            while(left <= right){
+                int mid = left + (right - left)/2;
+                if(mat[i][mid] == 0){
+                    count = mid;
+                    right = mid - 1;
+                } else if(mat[i][mid] == 1){
+                    left = mid + 1;
                 }
             }
-            soldierRowMap.put(i, count);
+            if(count == -1){
+            soldierCountMap.put(i, mat[i].length);
+            minHeap.add(mat[i].length);
+            } else {
+            soldierCountMap.put(i, count);
+            minHeap.add(count);
+            }
+            count = -1;
         }
 
-        for(int i = 0; i< k; i++){
-        int min = mat[0].length + 1;
-        int minKey = -1;
-            for(int j = 0; j< mat.length; j++){
-            Integer count = soldierRowMap.get(j);
-                if (count != null && count < min) {
-                    min = count;
-                    minKey = j;
-                }
+for(int i = 0; i <k; i++){
+ if (!minHeap.isEmpty()) {
+            int temp = minHeap.poll();
+            for (Map.Entry<Integer, Integer> entry : soldierCountMap.entrySet()) {
+            if (entry.getValue().equals(temp)) {
+                ans[i] = entry.getKey();
+                soldierCountMap.remove(ans[i]);
+                break;
+            }
         }
-        ans[i] = minKey;
-        soldierRowMap.remove(minKey);
         }
-        
+}
+   
+
+
         return ans;
     }
 }

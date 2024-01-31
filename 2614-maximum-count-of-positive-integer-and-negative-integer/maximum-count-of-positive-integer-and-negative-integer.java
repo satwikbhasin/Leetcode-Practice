@@ -34,10 +34,6 @@ if(positive_first < 0){
         zero_count = positive_first - negative_last - 1;
 }
 
-        System.out.println("Zeros are: " + zero_count);
-        System.out.println("negative_last: " + negative_last);
-        System.out.println("positive_first: " + positive_first);
-
         int positive_count = nums.length - zero_count - negative_last - 1;
         int negative_count = negative_last + 1;
 

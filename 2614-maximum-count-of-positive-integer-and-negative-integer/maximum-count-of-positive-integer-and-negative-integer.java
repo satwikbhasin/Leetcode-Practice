@@ -28,10 +28,11 @@ class Solution {
                 positive_first = mid;
             }
         }
+
 if(positive_first < 0){
     zero_count = nums.length - negative_last - 1;
 } else {
-        zero_count = positive_first - negative_last - 1;
+    zero_count = positive_first - negative_last - 1;
 }
 
         int positive_count = nums.length - zero_count - negative_last - 1;

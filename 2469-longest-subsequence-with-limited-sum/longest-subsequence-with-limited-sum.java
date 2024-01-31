@@ -1,19 +1,19 @@
 class Solution {
-    public int[] answerQueries(int[] array, int[] queries) {
-        Arrays.sort(array);
-        int[] result = new int[queries.length];
-        for (int i = 0; i < queries.length; i++) {
+    public int[] answerQueries(int[] nums, int[] queries) {
+        Arrays.sort(nums);
+        int[] answer = new int[queries.length];
+        for( int i = 0; i < queries.length; i++){
             int sum = 0;
-            int j = 0;
-            for (j = 0; j < array.length; j++) {
-                if (sum + array[j] > queries[i]) {
-                    result[i] = j;
+            int counter = 0;
+            for(int j = 0; j < nums.length; j++){
+                if((sum + nums[j]) > queries[i]){
                     break;
                 }
-                sum += array[j];
+                sum += nums[j];
+                counter++;
             }
-            if (j == array.length) result[i] = array.length;
-        }
-        return result;
+            answer[i] = counter;
+        } 
+        return answer;
     }
 }

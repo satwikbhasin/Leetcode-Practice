@@ -17,8 +17,10 @@ class Solution {
         }
 
         if(ans == -1){
+            // No difference was found between indexes and the numbers that should be there
             return nums.length;
         } else {
+            // A difference was found between indexes and the numbers that should be there
             return ans;
         }
     }

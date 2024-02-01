@@ -12,7 +12,7 @@
 class Solution {
     public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
 
-        // B R U T E F O R C E
+        // B R U T E F O R C E [O(n^2)]
         // List<List<Integer>> ans = new ArrayList<>();
         // for (int i = 1; i <= 1000; i++){
         //     if(customfunction.f(i,1) > z){
@@ -33,7 +33,7 @@ class Solution {
         // }
         // return ans;
 
-        // B I N A R Y   S E A R C H
+        // B I N A R Y   S E A R C H [O(nlogn)]
         List<List<Integer>> ans = new ArrayList<>();
         for (int i = 1; i <= 1000; i++){
             int left = 1;

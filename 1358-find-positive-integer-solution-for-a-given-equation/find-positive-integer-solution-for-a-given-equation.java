@@ -12,17 +12,13 @@
 class Solution {
     public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
         List<List<Integer>> ans = new ArrayList<>();
-        for (int i = 1; i <= 500; i++){
-            for( int j = 500; j >= 1; j--){
+        for (int i = 1; i <= 100; i++){
+            for( int j = 100; j >= 1; j--){
                 if(customfunction.f(i,j) == z){
                     List<Integer> innerList1 = new ArrayList<>();
                     innerList1.add(i);
                     innerList1.add(j);
                     ans.add(innerList1);
-                    // List<Integer> innerList2 = new ArrayList<>();
-                    // innerList2.add(j);
-                    // innerList2.add(i);
-                    // ans.add(innerList2);
                 }
             }
         }

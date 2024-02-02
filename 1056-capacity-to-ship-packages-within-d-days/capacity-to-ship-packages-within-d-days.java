@@ -1,3 +1,4 @@
+// B R U T E F O R C E
 // class Solution {
 //     public int shipWithinDays(int[] weights, int days) {
 //         int maxWeight = 0;
@@ -39,18 +40,17 @@
 //     }
 // }
 
+// B I N A R Y   S E A R C H
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
         int left = 0;
         int right = 0;
 
-        // Find the range of possible weight capacities
         for (int weight : weights) {
             left = Math.max(left, weight);
             right += weight;
         }
 
-        // Perform binary search to find the minimum weight capacity
         while (left < right) {
             int mid = left + (right - left) / 2;
             int daysNeeded = 1;
@@ -58,7 +58,6 @@ class Solution {
 
             for (int weight : weights) {
                 if (currentWeight + weight > mid) {
-                    // Move to the next day
                     daysNeeded++;
                     currentWeight = 0;
                 }
@@ -66,10 +65,8 @@ class Solution {
             }
 
             if (daysNeeded <= days) {
-                // We can ship within the given days, reduce the capacity
                 right = mid;
             } else {
-                // We need more days, increase the capacity
                 left = mid + 1;
             }
         }

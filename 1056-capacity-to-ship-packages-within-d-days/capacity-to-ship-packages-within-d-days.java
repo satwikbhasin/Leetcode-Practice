@@ -1,3 +1,4 @@
+// B I N A R Y   S E A R C H
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
         int left = 0;

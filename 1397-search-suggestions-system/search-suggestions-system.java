@@ -12,7 +12,6 @@ class Solution {
             while (left <= right) {
                 int mid = left + (right - left) / 2;
                 int len = Math.min((i), products[mid].length() - 1);
-                //System.out.println("Comparing " + products[mid].substring(0, len + 1) + " to " + searchWord.substring(0, i + 1));
                 if (products[mid].substring(0, len + 1).compareTo(searchWord.substring(0, i + 1)) > 0) {
                     right = mid - 1;
                 } else if (products[mid].substring(0, len + 1).compareTo(searchWord.substring(0, i + 1)) < 0) {

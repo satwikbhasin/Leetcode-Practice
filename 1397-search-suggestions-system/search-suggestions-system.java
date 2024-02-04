@@ -1,15 +1,8 @@
 class Solution {
-    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
-        Arrays.sort(products);
-        List<List<String>> outerList = new ArrayList<>();
 
-        for (int i = 0; i < searchWord.length(); i++) {
-            List<String> innerList = new ArrayList<>();
-            int left = 0;
-            int right = products.length - 1;
-            int firstOccurance = -1;
-
-            while (left <= right) {
+    private int findFirstOccuranceOfPrefix(String[] products, String searchWord, int i, int left, int right){
+        int firstOccurance = -1;
+        while (left <= right) {
                 int mid = left + (right - left) / 2;
                 int len = Math.min((i), products[mid].length() - 1);
                 if (products[mid].substring(0, len + 1).compareTo(searchWord.substring(0, i + 1)) > 0) {
@@ -20,7 +13,20 @@ class Solution {
                     firstOccurance = mid;
                     right = mid - 1;
                 }
-            } 
+            }
+        return firstOccurance;
+    }
+
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        Arrays.sort(products);
+        List<List<String>> outerList = new ArrayList<>();
+
+        for (int i = 0; i < searchWord.length(); i++) {
+            List<String> innerList = new ArrayList<>();
+            int left = 0;
+            int right = products.length - 1;
+
+            int firstOccurance = findFirstOccuranceOfPrefix(products, searchWord, i, left, right);
             
             if(firstOccurance != -1){
                 innerList.add(products[firstOccurance]);

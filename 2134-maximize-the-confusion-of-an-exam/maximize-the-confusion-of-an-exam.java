@@ -16,7 +16,6 @@ public class Solution {
 
         int result = 0;
         for(int i = 0; i < answerKey.length(); i++){
-            System.out.println("For " + answerKey.charAt(i));
             int left = i;
             int right = prefixSum.length-1;
             int sol = 0;

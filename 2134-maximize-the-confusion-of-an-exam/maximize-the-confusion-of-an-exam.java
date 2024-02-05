@@ -1,3 +1,4 @@
+// B I N A R Y   S E A R C H [O(nlogn)]
 public class Solution {
     public int maxConsecutiveAnswers(String answerKey, int k) {
         return Math.max(maxConsecutive(answerKey, 'T', k), maxConsecutive(answerKey, 'F', k));

@@ -28,12 +28,13 @@ class Solution {
                 sol.add(root.val);
                 return sol;        
         }
+
         for(Node child : children){
-            List<Integer> temp = postorder(child);
-            for(Integer i : temp){
+            for(Integer i : postorder(child)){
                 sol.add(i);
             }
         }
+
         sol.add(root.val);
         return sol;
     }

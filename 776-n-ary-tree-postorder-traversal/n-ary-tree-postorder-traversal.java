@@ -23,13 +23,13 @@ class Solution {
         if(root == null) 
             return sol;
 
-        //List<Node> children = root.children;
+        List<Node> children = root.children;
         if(root.children.isEmpty()){
                 sol.add(root.val);
                 return sol;        
         }
 
-        for(Node child : root.children){
+        for(Node child : children){
             List<Integer> temp = postorder(child);
             for(Integer i : temp){
                 sol.add(i);

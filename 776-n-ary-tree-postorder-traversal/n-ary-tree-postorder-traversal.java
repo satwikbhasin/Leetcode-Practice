@@ -24,18 +24,14 @@ class Solution {
             return sol;
 
         List<Node> children = root.children;
-        if(root.children.isEmpty()){
-                sol.add(root.val);
-                return sol;        
-        }
-
-        for(Node child : children){
-            List<Integer> temp = postorder(child);
-            for(Integer i : temp){
-                sol.add(i);
+        if(!root.children.isEmpty()){
+            for(Node child : children){
+                List<Integer> temp = postorder(child);
+                for(Integer i : temp){
+                    sol.add(i);
+                }
             }
         }
-        
         sol.add(root.val);
         return sol;
     }

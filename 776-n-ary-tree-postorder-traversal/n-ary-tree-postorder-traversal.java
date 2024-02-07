@@ -21,7 +21,8 @@ class Solution {
     public List<Integer> postorder(Node root) {
         List<Integer> sol = new ArrayList<>();
         if(root == null) 
-            return new ArrayList<Integer>();
+            return sol;
+
         List<Node> children = root.children;
         if(children.isEmpty()){
                 sol.add(root.val);

@@ -18,18 +18,15 @@ class Node {
 */
 
 class Solution {
+    List<Integer> sol = new ArrayList<>();
     public List<Integer> postorder(Node root) {
-        List<Integer> sol = new ArrayList<>();
         if(root == null) 
             return sol;
 
         List<Node> children = root.children;
         if(!root.children.isEmpty()){
             for(Node child : children){
-                List<Integer> temp = postorder(child);
-                for(Integer i : temp){
-                    sol.add(i);
-                }
+                postorder(child);
             }
         }
         sol.add(root.val);

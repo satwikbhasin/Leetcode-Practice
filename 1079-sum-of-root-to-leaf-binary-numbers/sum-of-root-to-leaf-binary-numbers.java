@@ -13,6 +13,8 @@
  *     }
  * }
  */
+
+// S T R I N G S
 // class Solution {
 //     int sol = 0;
 //     public int sumRootToLeaf(TreeNode root) {
@@ -32,6 +34,7 @@
 //     }
 // }
 
+// B I N A R Y   S H I F T   O P E R A T O R
 class Solution {
     int sol = 0;
 

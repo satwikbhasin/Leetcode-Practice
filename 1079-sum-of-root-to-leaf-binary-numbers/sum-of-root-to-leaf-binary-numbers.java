@@ -20,14 +20,14 @@ class Solution {
         return sol;
     }
 
-    private TreeNode helper(TreeNode root, String prevNumber){
-        if(root == null) return null;
+    private int helper(TreeNode root, String prevNumber){
+        if(root == null) return -1;
         prevNumber = prevNumber + root.val;
-        TreeNode left = helper(root.left, prevNumber);
-        TreeNode right = helper(root.right, prevNumber);
-        if(left == null && right == null){
+        int left = helper(root.left, prevNumber);
+        int right = helper(root.right, prevNumber);
+        if(left == -1 && right == -1){
             sol += Integer.parseInt(prevNumber, 2);
         }
-        return new TreeNode();
+        return 0;
     }
 }

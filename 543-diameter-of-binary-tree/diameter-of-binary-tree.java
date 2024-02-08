@@ -12,7 +12,7 @@ class Solution {
         int leftDepth = helper(node.left);
         int rightDepth = helper(node.right);
 
-        maxDiameter = Math.max(maxDiameter, leftDepth + rightDepth);
+        maxDiameter = maxDiameter > (leftDepth + rightDepth) ? maxDiameter : (leftDepth + rightDepth);
 
         return Math.max(leftDepth, rightDepth) + 1;
     }

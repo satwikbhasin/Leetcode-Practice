@@ -17,7 +17,6 @@ class Solution {
     int sol = 0;
     public int sumRootToLeaf(TreeNode root) {
         helper(root, new String());
-        System.out.println(sol);
         return sol;
     }
 

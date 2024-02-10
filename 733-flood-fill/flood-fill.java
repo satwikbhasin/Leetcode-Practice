@@ -6,11 +6,12 @@ class Solution {
             return image;
         }
 
-        int oldColor = image[sr][sc];
         visited = new boolean[image.length][image[0].length];
-        fill(image, sr, sc, oldColor, color);
+        fill(image, sr, sc, image[sr][sc], color);
+        
         return image;
     }
+
     private void fill(int[][] image, int sr, int sc, int oldColor, int newColor) {
         if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || visited[sr][sc] || image[sr][sc] != oldColor) {
             return;

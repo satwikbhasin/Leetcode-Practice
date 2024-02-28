@@ -23,17 +23,15 @@ class Solution {
         return leafs1.equals(leafs2);
     }
 
-    private Integer helper(TreeNode node, List<Integer> list) {
+    private void helper(TreeNode node, List<Integer> list) {
         if (node == null)
-            return null;
+            return;
 
-        Integer leftChild = helper(node.left, list);
-        Integer rightChild = helper(node.right, list);
+        helper(node.left, list);
+        helper(node.right, list);
 
-        if (leftChild == null && rightChild == null) {
+        if (node.left == null && node.right == null) {
             list.add(node.val);
         }
-
-        return 1;
     }
 }

@@ -24,14 +24,14 @@ class Solution {
     }
 
     private void helper(TreeNode node, List<Integer> list) {
-        if (node == null)
-            return;
+        if (node != null) {
 
-        helper(node.left, list);
-        helper(node.right, list);
+            helper(node.left, list);
+            helper(node.right, list);
 
-        if (node.left == null && node.right == null) {
-            list.add(node.val);
+            if (node.left == null && node.right == null) {
+                list.add(node.val);
+            }
         }
     }
 }

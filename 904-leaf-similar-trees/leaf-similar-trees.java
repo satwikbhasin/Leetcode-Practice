@@ -32,6 +32,7 @@ class Solution {
             if (node.left == null && node.right == null) {
                 list.add(node.val);
             }
+            
         }
     }
 }

@@ -1,22 +1,20 @@
 class Solution {
 
-    private static void dfs(String s, List<String> results, StringBuilder current, int startIndex, int dotsAdded) {
-        if (dotsAdded == 4) {
-            if (startIndex == s.length()) {
-                results.add(current.toString());
-            }
+    private static void dfs(String s, List<String> results, StringBuilder current, int startIndex, int segmentsAdded) {
+        if (startIndex == s.length() && segmentsAdded == 4) {
+            results.add(current.toString());
             return;
         }
 
-        for (int i = startIndex; i < s.length() && i < startIndex + 3; i++) {
-            String subString = s.substring(startIndex, i + 1);
+        for (int i = startIndex + 1; i <= s.length() && i <= startIndex + 3; i++) {
+            String subString = s.substring(startIndex, i);
             if (isValidSubString(subString)) {
                 int currentLength = current.length();
                 if (currentLength != 0) {
                     current.append(".");
                 }
                 current.append(subString);
-                dfs(s, results, current, i + 1, dotsAdded + 1);
+                dfs(s, results, current, i, segmentsAdded + 1);
                 current.setLength(currentLength);
             }
         }
@@ -31,6 +29,7 @@ class Solution {
     }
 
     public List<String> restoreIpAddresses(String s) {
+        System.out.println("string: " + s);
         List<String> results = new ArrayList<>();
         dfs(s, results, new StringBuilder(), 0, 0);
         return results;

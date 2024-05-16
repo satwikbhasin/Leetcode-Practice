@@ -14,8 +14,8 @@ class Solution {
             String substring = remainingString.substring(0, i);
             if (wordDict.contains(substring)) {
                 String newRemainingString = remainingString.substring(i);
-                if (                !memo.containsKey(newRemainingString)
- && dfs(newRemainingString, wordDict, memo)) {
+                if (!memo.containsKey(newRemainingString)
+                        && dfs(newRemainingString, wordDict, memo)) {
                     memo.put(remainingString, false);
                     return true;
                 }

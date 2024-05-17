@@ -15,7 +15,7 @@ class Solution {
             }
             // Optimization: If this matchstick can't be placed in the current empty side,
             // there's no point in trying to place it in the next empty side.
-            // if (sides[i] == 0) break;
+            if (sides[i] == 0) break;
         }
 
         return false;
@@ -33,12 +33,9 @@ class Solution {
 
         int possibleSideLength = perimeter / 4;
 
-        Arrays.sort(matchsticks);
-        for (int i = 0; i < matchsticks.length / 2; i++) {
-            int temp = matchsticks[i];
-            matchsticks[i] = matchsticks[matchsticks.length - 1 - i];
-            matchsticks[matchsticks.length - 1 - i] = temp;
-        }
+        Integer[] matchsticksInteger = Arrays.stream(matchsticks).boxed().toArray(Integer[]::new);
+
+        Arrays.sort(matchsticksInteger, Collections.reverseOrder());
 
         return dfs(matchsticks, 0, new int[4], possibleSideLength);
     }

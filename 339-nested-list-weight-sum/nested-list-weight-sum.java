@@ -44,9 +44,9 @@ class Solution {
     }
 
     public int depthSum(List<NestedInteger> nestedList) {
-        if (nestedList == null || nestedList.size() == 0) {
-            return 0;
-        }
+        // if (nestedList == null || nestedList.size() == 0) {
+        //     return 0;
+        // }
         return dfs(nestedList, 1);
     }
 }

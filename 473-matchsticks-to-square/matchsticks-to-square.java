@@ -15,7 +15,7 @@ class Solution {
             }
             // Optimization: If this matchstick can't be placed in the current empty side,
             // there's no point in trying to place it in the next empty side.
-            if (sides[i] == 0) break;
+            // if (sides[i] == 0) break;
         }
 
         return false;

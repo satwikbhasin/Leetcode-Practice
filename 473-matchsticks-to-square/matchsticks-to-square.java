@@ -33,9 +33,12 @@ class Solution {
 
         int possibleSideLength = perimeter / 4;
 
-        Integer[] matchsticksInteger = Arrays.stream(matchsticks).boxed().toArray(Integer[]::new);
-
-        Arrays.sort(matchsticksInteger, Collections.reverseOrder());
+        Arrays.sort(matchsticks);
+        for (int i = 0; i < matchsticks.length / 2; i++) {
+            int temp = matchsticks[i];
+            matchsticks[i] = matchsticks[matchsticks.length - 1 - i];
+            matchsticks[matchsticks.length - 1 - i] = temp;
+        }
 
         return dfs(matchsticks, 0, new int[4], possibleSideLength);
     }

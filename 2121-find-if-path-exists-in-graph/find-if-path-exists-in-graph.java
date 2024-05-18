@@ -13,10 +13,10 @@ class Solution {
         }
 
         Queue<Integer> queue = new LinkedList<>();
-        Set<Integer> visited = new HashSet<>();
+        boolean[] visited = new boolean[n];
 
         queue.add(source);
-        visited.add(source);
+        visited[source] = true;
 
         while(!queue.isEmpty()){
             int vertex = queue.remove();
@@ -24,11 +24,9 @@ class Solution {
             if(vertex == destination) return true;
 
             for(int neighbor : graph.get(vertex)){
-                if(neighbor == destination) return true;
-
-                if(!visited.contains(neighbor)){
+                if(!visited[neighbor]){
                     queue.add(neighbor);
-                    visited.add(neighbor);
+                    visited[neighbor] = true;
                 }
             }
         }

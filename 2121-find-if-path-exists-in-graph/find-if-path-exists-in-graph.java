@@ -21,6 +21,8 @@ class Solution {
         while(!queue.isEmpty()){
             int vertex = queue.remove();
 
+            if(vertex == destination) return true;
+
             for(int neighbor : graph.get(vertex)){
                 if(neighbor == destination) return true;
 

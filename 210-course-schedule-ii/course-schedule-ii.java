@@ -21,9 +21,9 @@ class Solution {
             }
         }
 
-        if (queue.isEmpty()) {
-            return new int[0];
-        }
+        // if (queue.isEmpty()) {
+        //     return new int[0];
+        // }
 
         int courseNumber = 0;
         while (!queue.isEmpty()) {

@@ -1,24 +1,26 @@
 class Solution {
 
-    int[][] directions = new int[][] {
-            { 1, 0 },
-            { 1, -1 },
-            { 0, -1 },
-            { -1, -1 },
-            { -1, 0 },
-            { -1, 1 },
-            { 0, 1 },
-            { 1, 1 }
+    private char[][] board;
+    private int boardRows = 0;
+    private int boardColumns = 0;
+
+    private int[][] directions = new int[][] {
+            { 1, 0 }, { 1, -1 }, { 0, -1 }, { -1, -1 },
+            { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }
     };
 
-    private char[] getNeighbors(char[][] board, int x, int y) {
+    private boolean isNeighborValid(int x, int y) {
+        return x >= 0 && x < boardRows && y >= 0 && y < boardColumns;
+    }
+
+    private char[] getNeighbors(int x, int y) {
         char[] neighbors = new char[8];
 
         for (int i = 0; i < 8; i++) {
             int newX = x + directions[i][0];
             int newY = y + directions[i][1];
 
-            if (newX >= 0 && newX < board.length && newY >= 0 && newY < board[0].length) {
+            if (isNeighborValid(newX, newY)) {
                 neighbors[i] = board[newX][newY];
             }
         }
@@ -26,7 +28,7 @@ class Solution {
         return neighbors;
     }
 
-    private char[][] dfs(char[][] board, int[] click, boolean[][] visited) {
+    private char[][] dfs(int[] click, boolean[][] visited) {
         if (board[click[0]][click[1]] == 'M') {
             board[click[0]][click[1]] = 'X';
             return board;
@@ -36,7 +38,7 @@ class Solution {
 
         if (board[click[0]][click[1]] == 'E') {
             int neighborMinesCount = 0;
-            for (char neighbor : getNeighbors(board, click[0], click[1])) {
+            for (char neighbor : getNeighbors(click[0], click[1])) {
                 if (neighbor == 'M')
                     neighborMinesCount++;
             }
@@ -45,9 +47,8 @@ class Solution {
                 for (int i = 0; i < 8; i++) {
                     int newX = click[0] + directions[i][0];
                     int newY = click[1] + directions[i][1];
-                    if (newX >= 0 && newX < board.length && newY >= 0 && newY < board[0].length
-                            && !visited[newX][newY]) {
-                        board = dfs(board, new int[] { newX, newY }, visited);
+                    if (isNeighborValid(newX, newY) && !visited[newX][newY]) {
+                        board = dfs(new int[] { newX, newY }, visited);
                     }
                 }
             } else {
@@ -59,6 +60,9 @@ class Solution {
     }
 
     public char[][] updateBoard(char[][] board, int[] click) {
-        return dfs(board, click, new boolean[board.length][board[0].length]);
+        this.board = board;
+        this.boardRows = board.length;
+        this.boardColumns = board[0].length;
+        return dfs(click, new boolean[boardRows][boardColumns]);
     }
 }

@@ -25,9 +25,6 @@ class Solution {
             }
         }
 
-        System.out.println("cityConnections: " + cityConnections);
-        System.out.println("graph: " + graph);
-
         int maxNetworkRank = 0;
 
         for (int i = 0; i < n; i++) {
@@ -36,7 +33,6 @@ class Solution {
                     int networkRank = cityConnections.get(i) + cityConnections.get(j);
                     if (graph.get(i).contains(j))
                         networkRank--;
-                    System.out.println("netwrok rank for " + i + " & " + j + " is: " + networkRank);
                     maxNetworkRank = maxNetworkRank > networkRank ? maxNetworkRank : networkRank;
                 }
             }

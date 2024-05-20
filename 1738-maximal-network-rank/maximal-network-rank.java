@@ -43,11 +43,10 @@
 //     }
 // }
 
-
 class Solution {
     public int maximalNetworkRank(int n, int[][] roads) {
-        int[] rank = new int[n]; // Array to store the degree of each city
-        boolean[][] connected = new boolean[n][n]; // Matrix to check if two cities are directly connected
+        int[] rank = new int[n];
+        boolean[][] connected = new boolean[n][n];
 
         for (int[] road : roads) {
             int city1 = road[0];
@@ -64,7 +63,7 @@ class Solution {
             for (int j = i + 1; j < n; j++) {
                 int networkRank = rank[i] + rank[j];
                 if (connected[i][j]) {
-                    networkRank--; // Adjust if there's a direct connection between i and j
+                    networkRank--;
                 }
                 maxNetworkRank = Math.max(maxNetworkRank, networkRank);
             }

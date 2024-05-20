@@ -1,13 +1,15 @@
 class Solution {
 
-    private static int[][] directions = new int[][] { { 1, 1 }, { 1, 0 }, { 0, 1 }, { -1, -1 }, { -1, 1 },
-            { 1, -1 }, { 0, -1 }, { -1, 0 } };
+    private static final int[][] directions = {
+            { 1, 1 }, { 1, 0 }, { 0, 1 }, { -1, -1 },
+            { -1, 1 }, { 1, -1 }, { 0, -1 }, { -1, 0 }
+    };
 
     public int shortestPathBinaryMatrix(int[][] grid) {
         if (grid[0][0] != 0)
             return -1;
 
-        Queue<int[]> queue = new LinkedList<>();
+        Deque<int[]> queue = new ArrayDeque<>();
         boolean[][] visited = new boolean[grid.length][grid[0].length];
 
         queue.add(new int[] { 0, 0 });

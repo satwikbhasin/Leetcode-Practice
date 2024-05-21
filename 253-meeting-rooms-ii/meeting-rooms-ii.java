@@ -9,18 +9,14 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
 
-        int rooms = 1;
         PriorityQueue<Integer> roomFreeTime = new PriorityQueue<>();
         roomFreeTime.add(intervals[0][1]);
 
         for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i][0] < roomFreeTime.peek()) {
-                rooms++;
-                roomFreeTime.add(intervals[i][1]);
-            } else {
+            if (intervals[i][0] >= roomFreeTime.peek()) {
                 roomFreeTime.poll();
-                roomFreeTime.add(intervals[i][1]);
             }
+            roomFreeTime.add(intervals[i][1]);
         }
 
         return roomFreeTime.size();

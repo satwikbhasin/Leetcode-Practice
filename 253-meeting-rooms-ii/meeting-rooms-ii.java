@@ -23,6 +23,6 @@ class Solution {
             }
         }
 
-        return rooms;
+        return roomFreeTime.size();
     }
 }

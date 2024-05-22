@@ -1,6 +1,6 @@
 class RecursionFactorial {
     public static void main(String[] args) {
-        int n = 1;
+        int n = 5;
         int factorial = factorial(n);
         System.out.println("Factorial of " + n + " is " + factorial);
     }

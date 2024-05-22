@@ -1,28 +1,34 @@
 class Solution {
-    boolean[][] visited;
-
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        if (image == null || image.length == 0 || sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length) {
-            return image;
-        }
+        Queue<int[]> queue = new LinkedList<>();
+        boolean[][] visited = new boolean[image.length][image[0].length];
 
-        visited = new boolean[image.length][image[0].length];
-        fill(image, sr, sc, image[sr][sc], color);
-        
-        return image;
-    }
-
-    private void fill(int[][] image, int sr, int sc, int oldColor, int newColor) {
-        if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || visited[sr][sc] || image[sr][sc] != oldColor) {
-            return;
-        }
-
+        queue.add(new int[] { sr, sc });
         visited[sr][sc] = true;
-        image[sr][sc] = newColor;
 
-        fill(image, sr - 1, sc, oldColor, newColor); // Up
-        fill(image, sr + 1, sc, oldColor, newColor); // Down
-        fill(image, sr, sc - 1, oldColor, newColor); // Left
-        fill(image, sr, sc + 1, oldColor, newColor); // Right
+        int ogColor = image[sr][sc];
+
+        while (!queue.isEmpty()) {
+            int[] currPixel = queue.remove();
+
+            int x = currPixel[0];
+            int y = currPixel[1];
+
+            if (image[x][y] == ogColor) {
+                image[x][y] = color;
+                visited[x][y] = true;
+            }
+
+            if (x + 1 < image.length && !visited[x + 1][y] && image[x+1][y] == ogColor)
+                queue.add(new int[] { x + 1, y });
+            if (y + 1 < image[0].length && !visited[x][y + 1] && image[x][y+1] == ogColor)
+                queue.add(new int[] { x, y + 1 });
+            if (x - 1 >= 0 && !visited[x - 1][y] && image[x-1][y] == ogColor)
+                queue.add(new int[] { x - 1, y });
+            if (y - 1 >= 0 && !visited[x][y - 1] && image[x][y-1] == ogColor)
+                queue.add(new int[] { x, y - 1 });
+
+        }
+        return image;
     }
 }

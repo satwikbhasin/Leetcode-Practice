@@ -21,8 +21,6 @@ class MedianFinder {
     }
 
     public double findMedian() {
-        System.out.println(smallerPile.peek() + ", " + smallerPile.size());
-        System.out.println(biggerPile.peek() + ", " + biggerPile.size());
         if (smallerPile.size() == biggerPile.size()) {
             return (smallerPile.peek() + biggerPile.peek()) / 2.0;
         } else {

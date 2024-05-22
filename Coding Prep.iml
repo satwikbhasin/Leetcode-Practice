@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/101-symmetric-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1056-capacity-to-ship-packages-within-d-days" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1079-sum-of-root-to-leaf-binary-numbers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/110-balanced-binary-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1149-intersection-of-three-sorted-arrays" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1358-find-positive-integer-solution-for-a-given-equation" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1397-search-suggestions-system" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1463-the-k-weakest-rows-in-a-matrix" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1476-count-negative-numbers-in-a-sorted-matrix" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1486-find-the-distance-value-between-two-arrays" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1498-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1609-find-all-the-lonely-nodes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/162-find-peak-element" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1646-kth-missing-positive-number" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1730-special-array-with-x-elements-greater-than-or-equal-x" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2134-maximize-the-confusion-of-an-exam" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2210-find-target-indices-after-sorting-array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/222-count-complete-tree-nodes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/226-invert-binary-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2416-evaluate-boolean-binary-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2437-maximum-number-of-groups-entering-a-competition" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2469-longest-subsequence-with-limited-sum" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2614-maximum-count-of-positive-integer-and-negative-integer" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/268-missing-number" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2843-extract-kth-character-from-the-rope-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2917-count-pairs-whose-sum-is-less-than-target" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/349-intersection-of-two-arrays" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/501-find-mode-in-binary-search-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/543-diameter-of-binary-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/617-merge-two-binary-trees" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/733-flood-fill" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/775-n-ary-tree-preorder-traversal" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/776-n-ary-tree-postorder-traversal" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/882-peak-index-in-a-mountain-array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/904-leaf-similar-trees" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/924-fair-candy-swap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/933-increasing-order-search-tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/94-binary-tree-inorder-traversal" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/975-range-sum-of-bst" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Playground" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

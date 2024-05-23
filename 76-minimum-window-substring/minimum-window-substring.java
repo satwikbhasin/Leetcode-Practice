@@ -1,33 +1,32 @@
-import java.util.HashMap;
-
 class Solution {
     public String minWindow(String s, String t) {
-        if (s.isEmpty() || t.isEmpty()) return "";
-
-        HashMap<Character, Integer> targetCount = new HashMap<>();
+        HashMap<Character, Integer> checkCount = new HashMap<>();
         HashMap<Character, Integer> windowCount = new HashMap<>();
 
         for (char c : t.toCharArray()) {
-            targetCount.put(c, targetCount.getOrDefault(c, 0) + 1);
+            checkCount.put(c, checkCount.getOrDefault(c, 0) + 1);
         }
 
-        int minLength = Integer.MAX_VALUE;
-        int windowStart = 0;
-        int left = 0;
-        int satisfied = 0;
-        int target = targetCount.size();
+        int ogLength = s.length();
+        int minLength = ogLength + 1;
 
-        for (int right = 0; right < s.length(); right++) {
+        int windowStart = -1;
+        int left = 0;
+
+        int satisfied = 0;
+        int required = checkCount.size();
+
+        for (int right = 0; right < ogLength; right++) {
             char newChar = s.charAt(right);
             windowCount.put(newChar, windowCount.getOrDefault(newChar, 0) + 1);
-
-            if (targetCount.containsKey(newChar) && windowCount.get(newChar).equals(targetCount.get(newChar))) {
+            if (checkCount.containsKey(newChar) && checkCount.get(newChar).equals(windowCount.get(newChar))) {
                 satisfied++;
             }
 
-            while (satisfied == target) {
+            while (satisfied == required) {
                 int currentWindowLength = right - left + 1;
-                if (currentWindowLength < minLength) {
+                if (currentWindowLength < minLength || (currentWindowLength == minLength && s.substring(left, right + 1)
+                        .compareTo(s.substring(windowStart, windowStart + minLength)) < 0)) {
                     minLength = currentWindowLength;
                     windowStart = left;
                 }
@@ -35,12 +34,12 @@ class Solution {
                 char leftChar = s.charAt(left);
                 windowCount.put(leftChar, windowCount.get(leftChar) - 1);
 
-                if (targetCount.containsKey(leftChar) && windowCount.get(leftChar) < targetCount.get(leftChar)) {
+                if (checkCount.containsKey(leftChar) && windowCount.get(leftChar) < checkCount.get(leftChar)) {
                     satisfied--;
                 }
                 left++;
             }
         }
-        return minLength == Integer.MAX_VALUE ? "" : s.substring(windowStart, windowStart + minLength);
+        return windowStart >= 0 ? s.substring(windowStart, windowStart + minLength) : "";
     }
 }

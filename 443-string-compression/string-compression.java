@@ -19,7 +19,6 @@ class Solution {
 
             if (groupLength > 1) {
                 String countStr = String.valueOf(groupLength);
-                System.out.println("Group Length: " + countStr);
                 for (char c : countStr.toCharArray()) {
                     chars[write++] = c;
                 }

@@ -2,6 +2,8 @@ import java.util.HashMap;
 
 class Solution {
     public String minWindow(String s, String t) {
+        if (s.isEmpty() || t.isEmpty()) return "";
+
         HashMap<Character, Integer> targetCount = new HashMap<>();
         HashMap<Character, Integer> windowCount = new HashMap<>();
 

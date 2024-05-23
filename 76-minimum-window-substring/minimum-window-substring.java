@@ -15,6 +15,7 @@ class Solution {
         int windowStart = 0;
         int left = 0;
         int satisfied = 0;
+        int target = targetCount.size();
 
         for (int right = 0; right < s.length(); right++) {
             char newChar = s.charAt(right);
@@ -24,7 +25,7 @@ class Solution {
                 satisfied++;
             }
 
-            while (satisfied == targetCount.size()) {
+            while (satisfied == target) {
                 int currentWindowLength = right - left + 1;
                 if (currentWindowLength < minLength) {
                     minLength = currentWindowLength;

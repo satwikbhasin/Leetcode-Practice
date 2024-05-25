@@ -1,6 +1,7 @@
 class Solution {
     public int[] platesBetweenCandles(String s, int[][] queries) {
         int[] answer = new int[queries.length];
+        
         List<Integer> candlePositions = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '|')

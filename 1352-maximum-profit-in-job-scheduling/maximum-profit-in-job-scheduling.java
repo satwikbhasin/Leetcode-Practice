@@ -42,21 +42,25 @@ class Solution {
         return maxProfits[n - 1];
     }
 
-    // Helper method to find the index of the last non-overlapping job using binary search
     private int findLastNonOverlappingJob(Job[] jobs, int index) {
-        int start = 0, end = index - 1;
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (jobs[mid].endTime <= jobs[index].startTime) {
-                if (mid + 1 < index && jobs[mid + 1].endTime <= jobs[index].startTime) {
-                    start = mid + 1;
-                } else {
-                    return mid;
-                }
+    int low = 0;
+    int high = index - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (jobs[mid].endTime <= jobs[index].startTime) {
+            if (jobs[mid + 1].endTime <= jobs[index].startTime) {
+                low = mid + 1;
             } else {
-                end = mid - 1;
+                return mid;
             }
+        } else {
+            high = mid - 1;
         }
-        return -1;
     }
+
+    return -1;
+}
+
 }

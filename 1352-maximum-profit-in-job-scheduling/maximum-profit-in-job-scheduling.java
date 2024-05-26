@@ -1,49 +1,54 @@
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 class Job {
-    int start, end, profit;
+    int startTime, endTime, profit;
 
-    public Job(int start, int end, int profit) {
-        this.start = start;
-        this.end = end;
+    public Job(int startTime, int endTime, int profit) {
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.profit = profit;
     }
 }
 
 class Solution {
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
+        // Create an array of jobs
         int n = startTime.length;
         Job[] jobs = new Job[n];
         for (int i = 0; i < n; i++) {
             jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
         }
 
-        Arrays.sort(jobs, Comparator.comparingInt(a -> a.end));
+        // Sort the jobs by their end time
+        Arrays.sort(jobs, Comparator.comparingInt(job -> job.endTime));
 
-        int[] dp = new int[n];
-        dp[0] = jobs[0].profit;
+        // Initialize an array to store the maximum profit
+        int[] maxProfits = new int[n];
+        maxProfits[0] = jobs[0].profit; // Initialize the first profit
 
+        // Calculate maximum profit for each job
         for (int i = 1; i < n; i++) {
-            int includedProfit = jobs[i].profit;
-            int l = search(jobs, i);
-            if (l != -1) {
-                includedProfit += dp[l];
+            int currentProfit = jobs[i].profit; // Current job's profit
+            int lastNonOverlappingIndex = findLastNonOverlappingJob(jobs, i); // Find the last non-overlapping job
+            if (lastNonOverlappingIndex != -1) {
+                currentProfit += maxProfits[lastNonOverlappingIndex]; // Add profit of last non-overlapping job
             }
 
-            dp[i] = Math.max(includedProfit, dp[i - 1]);
+            // Store the maximum profit at this index
+            maxProfits[i] = Math.max(currentProfit, maxProfits[i - 1]);
         }
 
-        return dp[n - 1];
+        // Return the maximum profit
+        return maxProfits[n - 1];
     }
 
-    private int search(Job[] jobs, int index) {
+    // Helper method to find the index of the last non-overlapping job using binary search
+    private int findLastNonOverlappingJob(Job[] jobs, int index) {
         int start = 0, end = index - 1;
-
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if (jobs[mid].end <= jobs[index].start) {
-                if (jobs[mid + 1].end <= jobs[index].start) {
+            if (jobs[mid].endTime <= jobs[index].startTime) {
+                if (mid + 1 < index && jobs[mid + 1].endTime <= jobs[index].startTime) {
                     start = mid + 1;
                 } else {
                     return mid;
@@ -52,7 +57,6 @@ class Solution {
                 end = mid - 1;
             }
         }
-
         return -1;
     }
 }

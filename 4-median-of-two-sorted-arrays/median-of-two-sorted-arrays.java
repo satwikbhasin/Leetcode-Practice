@@ -1,39 +1,41 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // Ensure nums1 is the smaller array to optimize the partitioning process
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
+
         int m = nums1.length;
         int n = nums2.length;
         int totalLength = m + n;
-        int medianIndex1 = (totalLength - 1) / 2;
-        int medianIndex2 = totalLength / 2;
+        int halfLength = (totalLength + 1) / 2;
 
-        int i = 0, j = 0;
-        int count = 0;
-        int median1 = 0, median2 = 0;
+        int left = 0;
+        int right = m;
 
-        while (i < m || j < n) {
-            int currentValue;
-            if (i < m && (j >= n || nums1[i] < nums2[j])) {
-                currentValue = nums1[i];
-                i++;
+        while (left <= right) {
+            int partitionA = (left + right) / 2;
+            int partitionB = halfLength - partitionA;
+
+            int maxLeftA = (partitionA == 0) ? Integer.MIN_VALUE : nums1[partitionA - 1];
+            int minRightA = (partitionA == m) ? Integer.MAX_VALUE : nums1[partitionA];
+
+            int maxLeftB = (partitionB == 0) ? Integer.MIN_VALUE : nums2[partitionB - 1];
+            int minRightB = (partitionB == n) ? Integer.MAX_VALUE : nums2[partitionB];
+
+            if (maxLeftA <= minRightB && maxLeftB <= minRightA) {
+                if (totalLength % 2 == 0) {
+                    return (Math.max(maxLeftA, maxLeftB) + Math.min(minRightA, minRightB)) / 2.0;
+                } else {
+                    return Math.max(maxLeftA, maxLeftB);
+                }
+            } else if (maxLeftA > minRightB) {
+                right = partitionA - 1;
             } else {
-                currentValue = nums2[j];
-                j++;
+                left = partitionA + 1;
             }
-
-            if (count == medianIndex1) {
-                median1 = currentValue;
-            }
-            if (count == medianIndex2) {
-                median2 = currentValue;
-                break;
-            }
-            count++;
         }
 
-        if (totalLength % 2 == 0) {
-            return (median1 + median2) / 2.0;
-        } else {
-            return median2;
-        }
+        throw new IllegalArgumentException("Input arrays are not sorted.");
     }
 }

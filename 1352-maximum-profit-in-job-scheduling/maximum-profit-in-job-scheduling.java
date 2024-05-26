@@ -1,72 +1,66 @@
 class Job {
-    int startTime, endTime, profit;
+    int start;
+    int end;
+    int profit;
 
-    public Job(int startTime, int endTime, int profit) {
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public Job(int start, int end, int profit) {
+        this.start = start;
+        this.end = end;
         this.profit = profit;
     }
 }
 
 class Solution {
-    // maximum number of jobs are 50000
-    int[] memo = new int[50001];
+    int memo[];
 
-    private int findNextJob(int[] startTime, int lastEndingTime) {
-        int start = 0, end = startTime.length - 1, nextIndex = startTime.length;
+    private int findNextPossibleJob(Job[] jobs, int currentEndTime) {
+        int left = 0;
+        int right = jobs.length - 1;
+        int nextPossibleJob = jobs.length;
 
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            if (startTime[mid] >= lastEndingTime) {
-                nextIndex = mid;
-                end = mid - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (jobs[mid].start >= currentEndTime) {
+                nextPossibleJob = mid;
+                right = mid - 1;
             } else {
-                start = mid + 1;
+                left = mid + 1;
             }
         }
-        return nextIndex;
+
+        return nextPossibleJob;
     }
 
-    private int findMaxProfit(Job[] jobs, int[] startTime, int n, int position) {
-        // 0 profit if we have already iterated over all the jobs
-        if (position == n) {
+    private int findMaxProfit(Job[] jobs, int totalJobs, int currentJobIndex) {
+        if (currentJobIndex == totalJobs) {
             return 0;
         }
 
-        // return result directly if it's calculated
-        if (memo[position] != -1) {
-            return memo[position];
+        if (memo[currentJobIndex] != -1) {
+            return memo[currentJobIndex];
         }
 
-        // nextIndex is the index of next non-conflicting job
-        int nextIndex = findNextJob(startTime, jobs[position].endTime);
+        int nextPossibleJobIndex = findNextPossibleJob(jobs, jobs[currentJobIndex].end);
 
-        // find the maximum profit of our two options: skipping or scheduling the
-        // current job
-        int maxProfit = Math.max(findMaxProfit(jobs, startTime, n, position + 1),
-                jobs[position].profit + findMaxProfit(jobs, startTime, n, nextIndex));
+        int maxProfit = Math.max(jobs[currentJobIndex].profit + findMaxProfit(jobs, totalJobs, nextPossibleJobIndex),
+                findMaxProfit(jobs, totalJobs, currentJobIndex + 1));
+        memo[currentJobIndex] = maxProfit;
 
-        // return maximum profit and also store it for future reference (memoization)
-        return memo[position] = maxProfit;
+        return maxProfit;
     }
 
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
+        int totalJobs = startTime.length;
 
-        int n = startTime.length;
-        Job[] jobs = new Job[n];
-        for (int i = 0; i < n; i++) {
+        Job[] jobs = new Job[totalJobs];
+        for (int i = 0; i < totalJobs; i++) {
             jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
         }
+        Arrays.sort(jobs, Comparator.comparingInt(a -> a.start));
 
+        memo = new int[totalJobs];
         Arrays.fill(memo, -1);
 
-        Arrays.sort(jobs, Comparator.comparingInt(a -> a.startTime));
-
-        // binary search will be used in startTime so store it as separate list
-        for (int i = 0; i < n; i++) {
-            startTime[i] = jobs[i].startTime;
-        }
-
-        return findMaxProfit(jobs, startTime, n, 0);
+        return findMaxProfit(jobs, totalJobs, 0);
     }
 }

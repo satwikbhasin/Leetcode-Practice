@@ -1,41 +1,40 @@
 class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        // Ensure nums1 is the smaller array to optimize the partitioning process
-        if (nums1.length > nums2.length) {
-            return findMedianSortedArrays(nums2, nums1);
+    private int findK(int[] nums1, int[] nums2, int aStart, int aEnd, int bStart, int bEnd, int k) {
+        if (aEnd < aStart) {
+            return nums2[k - aStart];
         }
 
-        int m = nums1.length;
-        int n = nums2.length;
-        int totalLength = m + n;
-        int halfLength = (totalLength + 1) / 2;
+        if (bEnd < bStart) {
+            return nums1[k - bStart];
+        }
 
-        int left = 0;
-        int right = m;
+        int aIndex = (aStart + aEnd) / 2, bIndex = (bStart + bEnd) / 2;
+        int aValue = nums1[aIndex], bValue = nums2[bIndex];
 
-        while (left <= right) {
-            int partitionA = (left + right) / 2;
-            int partitionB = halfLength - partitionA;
-
-            int maxLeftA = (partitionA == 0) ? Integer.MIN_VALUE : nums1[partitionA - 1];
-            int minRightA = (partitionA == m) ? Integer.MAX_VALUE : nums1[partitionA];
-
-            int maxLeftB = (partitionB == 0) ? Integer.MIN_VALUE : nums2[partitionB - 1];
-            int minRightB = (partitionB == n) ? Integer.MAX_VALUE : nums2[partitionB];
-
-            if (maxLeftA <= minRightB && maxLeftB <= minRightA) {
-                if (totalLength % 2 == 0) {
-                    return (Math.max(maxLeftA, maxLeftB) + Math.min(minRightA, minRightB)) / 2.0;
-                } else {
-                    return Math.max(maxLeftA, maxLeftB);
-                }
-            } else if (maxLeftA > minRightB) {
-                right = partitionA - 1;
+        if (aIndex + bIndex < k) {
+            if (aValue > bValue) {
+                return findK(nums1, nums2, aStart, aEnd, bIndex + 1, bEnd, k);
             } else {
-                left = partitionA + 1;
+                return findK(nums1, nums2, aIndex + 1, aEnd, bStart, bEnd, k);
+            }
+        } else {
+            if (aValue > bValue) {
+                return findK(nums1, nums2, aStart, aIndex - 1, bStart, bEnd, k);
+            } else {
+                return findK(nums1, nums2, aStart, aEnd, bStart, bIndex - 1, k);
             }
         }
+    }
 
-        throw new IllegalArgumentException("Input arrays are not sorted.");
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int n = n1 + n2;
+        if (n % 2 == 0) {
+            return (double) (findK(nums1, nums2, 0, n1 - 1, 0, n2 - 1, n / 2)
+                    + findK(nums1, nums2, 0, n1 - 1, 0, n2 - 1, n / 2 - 1)) / 2;
+        } else {
+            return findK(nums1, nums2, 0, n1 - 1, 0, n2 - 1, n / 2);
+        }
     }
 }

@@ -6,10 +6,12 @@ class Solution {
             int pop = x % 10;
             x = x / 10;
 
-            if (reversed > Integer.MAX_VALUE / 10 || (reversed == Integer.MAX_VALUE / 10 && pop > Integer.MAX_VALUE%10)) {
+            if (reversed > Integer.MAX_VALUE / 10
+                    || (reversed == Integer.MAX_VALUE / 10 && pop > Integer.MAX_VALUE % 10)) {
                 return 0; // Overflow
             }
-            if (reversed < Integer.MIN_VALUE / 10 || (reversed == Integer.MIN_VALUE / 10 && pop < -8)) {
+            if (reversed < Integer.MIN_VALUE / 10
+                    || (reversed == Integer.MIN_VALUE / 10 && pop < Integer.MIN_VALUE % 10)) {
                 return 0; // Underflow
             }
 

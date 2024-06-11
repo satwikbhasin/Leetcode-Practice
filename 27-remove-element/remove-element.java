@@ -1,12 +1,15 @@
 class Solution {
     public int removeElement(int[] nums, int val) {
-        int invalidChanger = 0;
-        for (int valFinder = 0; valFinder < nums.length; valFinder++) {
-            if (nums[valFinder] != val) {
-                nums[invalidChanger++] = nums[valFinder];
+        int index = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == val) {
+            } else {
+                nums[index] = nums[i];
+                index++;
             }
         }
 
-        return invalidChanger;
+        return index;
     }
 }

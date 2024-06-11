@@ -5,8 +5,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == val) {
             } else {
-                nums[index] = nums[i];
-                index++;
+                nums[index++] = nums[i];
             }
         }
 

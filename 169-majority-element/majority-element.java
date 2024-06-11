@@ -1,12 +1,20 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer, Integer> count = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            count.put(nums[i], count.getOrDefault(nums[i], 0) + 1);
+        int candidate = nums[0];
+        int candidateCount = 0;
 
-            if (count.get(nums[i]) > nums.length/2) return nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            if (candidateCount == 0 && nums[i] != candidate) {
+                candidate = nums[i];
+            } 
+            
+            if (nums[i] != candidate) {
+                candidateCount--;
+            } else if (nums[i] == candidate) {
+                candidateCount++;
+            }
         }
 
-        return -1;
+        return candidate;
     }
 }

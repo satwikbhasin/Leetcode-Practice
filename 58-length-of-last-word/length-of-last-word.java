@@ -5,11 +5,9 @@ class Solution {
         for (int i = s.length() - 1; i >= 0; i--) {
             if (s.charAt(i) == ' ' && wordEncountered) {
                 break;
-            }
-            if (s.charAt(i) != ' ' && !wordEncountered) {
+            } else if (s.charAt(i) != ' ' && !wordEncountered) {
                 wordEncountered = true;
-            }
-            if (s.charAt(i) == ' ' && !wordEncountered) {
+            } else if (s.charAt(i) == ' ' && !wordEncountered) {
                 continue;
             }
             length++;

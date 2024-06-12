@@ -1,52 +1,43 @@
+import java.util.*;
+
 class RandomizedSet {
-    Set<Integer> set;
+    HashMap<Integer, Integer> elementIndexMap;
+    List<Integer> list;
     Random random;
 
-    // O(1)
     public RandomizedSet() {
-        this.set = new HashSet<>();
+        this.elementIndexMap = new HashMap<>();
+        this.list = new ArrayList<>();
         this.random = new Random();
     }
 
-    // O(1)
     public boolean insert(int val) {
-        if (this.set.contains(val)) {
+        if (elementIndexMap.containsKey(val)) {
             return false;
         } else {
-            this.set.add(val);
+            elementIndexMap.put(val, list.size());
+            list.add(val);
             return true;
         }
     }
 
-    // O(1)
     public boolean remove(int val) {
-        if (this.set.contains(val)) {
-            this.set.remove(val);
+        if (elementIndexMap.containsKey(val)) {
+            int temp = list.get(list.size() - 1);
+            
+            list.set(elementIndexMap.get(val), temp);
+            elementIndexMap.put(temp, elementIndexMap.get(val));
+
+            list.remove(list.size() - 1);
+            elementIndexMap.remove(val);
             return true;
         } else {
             return false;
         }
     }
 
-    // O(n)
     public int getRandom() {
-        int randomIndexInSet = this.random.nextInt(this.set.size());
-        int index = 0;
-        for (int element : this.set) {
-            if (index == randomIndexInSet) {
-                return element;
-            }
-            index++;
-        }
-
-        return Integer.MIN_VALUE;
+        int randomIndex = random.nextInt(list.size());
+        return list.get(randomIndex);
     }
 }
-
-/**
- * Your RandomizedSet object will be instantiated and called as such:
- * RandomizedSet obj = new RandomizedSet();
- * boolean param_1 = obj.insert(val);
- * boolean param_2 = obj.remove(val);
- * int param_3 = obj.getRandom();
- */

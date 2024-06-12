@@ -1,3 +1,4 @@
+// O(n) Time, O(1) Space
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int totalGas = 0, currentGas = 0, startIndex = 0;

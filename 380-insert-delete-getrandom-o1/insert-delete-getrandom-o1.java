@@ -2,11 +2,13 @@ class RandomizedSet {
     Set<Integer> set;
     Random random;
 
+    // O(1)
     public RandomizedSet() {
         this.set = new HashSet<>();
         this.random = new Random();
     }
 
+    // O(1)
     public boolean insert(int val) {
         if (this.set.contains(val)) {
             return false;
@@ -16,6 +18,7 @@ class RandomizedSet {
         }
     }
 
+    // O(1)
     public boolean remove(int val) {
         if (this.set.contains(val)) {
             this.set.remove(val);
@@ -25,6 +28,7 @@ class RandomizedSet {
         }
     }
 
+    // O(n)
     public int getRandom() {
         int randomIndexInSet = this.random.nextInt(this.set.size());
         int index = 0;

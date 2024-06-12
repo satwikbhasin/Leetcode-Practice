@@ -1,13 +1,12 @@
+// O(nlogn) Time, O(1) Space
 class Solution {
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
 
-        int n = citations.length;
+        int hIndex = Integer.MIN_VALUE;
 
-        int hIndex = 0;
-
-        for (int i = 0; i < n; i++) {
-            int h = Math.min(citations[i], n - i);
+        for (int i = 0; i < citations.length; i++) {
+            int h = Math.min(citations[i], citations.length - i);
             hIndex = Math.max(hIndex, h);
         }
 

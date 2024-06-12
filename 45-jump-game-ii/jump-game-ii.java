@@ -5,11 +5,14 @@ class Solution {
         int currentJumpsEnd = 0;
 
         for (int i = 0; i < nums.length - 1; i++) {
-            currentJumpsEnd = Math.max(currentJumpsEnd, i + nums[i]);
+            currentJumpsFarthest = Math.max(currentJumpsFarthest, i + nums[i]);
 
-            if(i == currentJumpsFarthest){
+            if (i == currentJumpsEnd) {
                 minJumps++;
-                currentJumpsFarthest = currentJumpsEnd;
+                currentJumpsEnd = currentJumpsFarthest;
+
+                if (currentJumpsEnd >= nums.length - 1)
+                    break;
             }
         }
 

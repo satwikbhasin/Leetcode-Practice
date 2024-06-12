@@ -14,17 +14,19 @@ class Solution {
 
         if (zeroCount > 1) {
             return solution;
-        } else if (zeroCount == 1) {
+        }
+
+        if (zeroCount == 1) {
             for (int i = 0; i < nums.length; i++) {
                 if (nums[i] == 0) {
                     solution[i] = product;
-                    break;
+                    return solution;
                 }
             }
-        } else {
-            for (int i = 0; i < nums.length; i++) {
-                solution[i] = product / nums[i];
-            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            solution[i] = product / nums[i];
         }
 
         return solution;

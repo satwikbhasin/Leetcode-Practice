@@ -1,5 +1,5 @@
 class Solution {
-    public static boolean isLetterOrDigit(char c) {
+    private boolean isLetterOrDigit(char c) {
         return Character.isLetter(c) || Character.isDigit(c);
     }
 
@@ -11,7 +11,7 @@ class Solution {
             while (left <= right && !isLetterOrDigit(s.charAt(left))) {
                 left++;
             }
-            while (right >= left && !isLetterOrDigit(s.charAt(right))) {
+            while (left <= right && !isLetterOrDigit(s.charAt(right))) {
                 right--;
             }
             if (left <= right && Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {

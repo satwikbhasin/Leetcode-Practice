@@ -2,6 +2,7 @@ class Solution {
     public String minWindow(String s, String t) {
         if (t.length() > s.length() || s.length() == 0)
             return "";
+
         HashMap<Character, Integer> windowMap = new HashMap<>();
         HashMap<Character, Integer> tFrequency = new HashMap<>();
 
@@ -34,7 +35,7 @@ class Solution {
                     sol = s.substring(left, right + 1);
                 }
 
-                windowMap.put(leftChar, windowMap.getOrDefault(leftChar, 1) - 1);
+                windowMap.put(leftChar, windowMap.get(leftChar) - 1);
                 if (tFrequency.containsKey(leftChar)
                         && windowMap.get(leftChar).intValue() < tFrequency.get(leftChar).intValue()) {
                     satisfied--;

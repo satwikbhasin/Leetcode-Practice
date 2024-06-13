@@ -1,46 +1,45 @@
-import java.util.*;
-
 class Solution {
     public List<Integer> findSubstring(String s, String[] words) {
-        List<Integer> sol = new ArrayList<>();
-        if (s == null || s.length() == 0 || words == null || words.length == 0) {
-            return sol;
-        }
+        HashMap<String, Integer> wordsFrequency = new HashMap<>();
 
-        int wordCount = words.length;
+        List<Integer> sol = new ArrayList<>();
+
         int wordLength = words[0].length();
+        int wordCount = words.length;
         int windowSize = wordLength * wordCount;
 
-        // Create frequency map for words
-        Map<String, Integer> wordFrequency = new HashMap<>();
+        if (s.length() < windowSize || s == null || s.length() == 0)
+            return sol;
+
         for (String word : words) {
-            wordFrequency.put(word, wordFrequency.getOrDefault(word, 0) + 1);
+            wordsFrequency.put(word, wordsFrequency.getOrDefault(word, 0) + 1);
         }
 
-        // Iterate over each possible starting point in s with a sliding window
         for (int i = 0; i < wordLength; i++) {
-            int left = i, count = 0;
-            Map<String, Integer> seenWords = new HashMap<>();
-            
+            HashMap<String, Integer> seenWordsFrequency = new HashMap<>();
+            int count = 0;
+            int left = i;
+
             for (int right = i; right <= s.length() - wordLength; right += wordLength) {
-                String word = s.substring(right, right + wordLength);
-                
-                if (wordFrequency.containsKey(word)) {
-                    seenWords.put(word, seenWords.getOrDefault(word, 0) + 1);
+                String currWord = s.substring(right, right + wordLength);
+                if (wordsFrequency.containsKey(currWord)) {
+
+                    seenWordsFrequency.put(currWord, seenWordsFrequency.getOrDefault(currWord, 0) + 1);
                     count++;
 
-                    while (seenWords.get(word) > wordFrequency.get(word)) {
+                    while (seenWordsFrequency.get(currWord) > wordsFrequency.get(currWord)) {
                         String leftWord = s.substring(left, left + wordLength);
-                        seenWords.put(leftWord, seenWords.get(leftWord) - 1);
-                        count--;
+                        seenWordsFrequency.put(leftWord, seenWordsFrequency.get(leftWord) - 1);
                         left += wordLength;
-                    }
+                        count--;
+                    }   
 
-                    if (count == wordCount) {
+                    if(count == wordCount){
                         sol.add(left);
                     }
+
                 } else {
-                    seenWords.clear();
+                    seenWordsFrequency.clear();
                     count = 0;
                     left = right + wordLength;
                 }
@@ -48,5 +47,6 @@ class Solution {
         }
 
         return sol;
+
     }
 }

@@ -15,11 +15,12 @@ class Solution {
             if (tPointer < t.length() && s.charAt(i) == t.charAt(tPointer)) {
                 charsMatched++;
             }
-            if (charsMatched == s.length()) {
+            if(charsMatched == s.length()){
                 return true;
             }
             tPointer++;
         }
+
         return false;
     }
 }

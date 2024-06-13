@@ -1,3 +1,4 @@
+// O(1) Time, O(1) Space
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         for (int i = 0; i < 9; i++) {

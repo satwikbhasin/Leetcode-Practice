@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     private class Line {
         private int emptySpaces;

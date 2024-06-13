@@ -3,7 +3,7 @@ class Solution {
     boolean[][] visited;
     int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // right, down, left, up
 
-    private void dfs(int x, int y, int dir, int[][] matrix) {
+    private void traverse(int x, int y, int dir, int[][] matrix) {
         if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length || visited[x][y]) {
             return;
         }
@@ -20,7 +20,7 @@ class Solution {
             newY = y + directions[dir][1];
         }
 
-        dfs(newX, newY, dir, matrix);
+        traverse(newX, newY, dir, matrix);
     }
 
     public List<Integer> spiralOrder(int[][] matrix) {
@@ -31,7 +31,7 @@ class Solution {
         visited = new boolean[matrix.length][matrix[0].length];
         sol = new ArrayList<>();
 
-        dfs(0, 0, 0, matrix);
+        traverse(0, 0, 0, matrix);
 
         return sol;
     }

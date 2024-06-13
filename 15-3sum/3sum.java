@@ -22,7 +22,7 @@ class Solution {
                     while (left < right && nums[left - 1] == nums[left]) {
                         left++;
                     }
-                    while (left < right - 1 && nums[right + 1] == nums[right]) {
+                    while (left < right && nums[right + 1] == nums[right]) {
                         right--;
                     }
                 } else if (total > 0) {

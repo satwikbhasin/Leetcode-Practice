@@ -3,7 +3,7 @@ class Solution {
         if (numRows == s.length() || numRows == 1)
             return s;
 
-        List<StringBuilder> arrays = new ArrayList<>();
+        List<StringBuilder> arrays = new ArrayList<>(numRows);
 
         for (int i = 0; i < numRows; i++) {
             arrays.add(new StringBuilder());

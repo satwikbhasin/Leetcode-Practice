@@ -1,5 +1,8 @@
+// O(n^2) Time, O(1) Space, 
 class Solution {
     public void rotate(int[][] matrix) {
+
+        // Transpose
         for (int i = 0; i < matrix.length; i++) {
             for (int j = i; j < matrix[0].length; j++) {
                 int temp = matrix[i][j];
@@ -8,6 +11,7 @@ class Solution {
             }
         }
 
+        // Reverse Rows
         for (int i = 0; i < matrix.length; i++) {
             int left = 0;
             int right = matrix[i].length - 1;

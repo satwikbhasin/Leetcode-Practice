@@ -1,3 +1,4 @@
+// O(n) Time [Amortized], O(1) Space
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
         int minLength = Integer.MAX_VALUE;

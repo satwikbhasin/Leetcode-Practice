@@ -10,10 +10,9 @@ class Solution {
             tFrequency.put(c, tFrequency.getOrDefault(c, 0) + 1);
         }
 
-        String sol = "";
-
         int required = tFrequency.size();
         int satisfied = 0;
+        int validWindowStart = -1;
 
         int minLength = s.length() + 1;
 
@@ -32,12 +31,16 @@ class Solution {
 
                 if (minLength > right - left + 1) {
                     minLength = right - left + 1;
-                    sol = s.substring(left, right + 1);
+                    validWindowStart = left;
                 }
 
                 windowMap.put(leftChar, windowMap.get(leftChar) - 1);
+                if (windowMap.get(leftChar) == 0) {
+                    windowMap.remove(leftChar);
+                }
+
                 if (tFrequency.containsKey(leftChar)
-                        && windowMap.get(leftChar).intValue() < tFrequency.get(leftChar).intValue()) {
+                        && windowMap.getOrDefault(leftChar, 0) < tFrequency.get(leftChar).intValue()) {
                     satisfied--;
                 }
 
@@ -46,6 +49,6 @@ class Solution {
             }
         }
 
-        return sol;
+        return validWindowStart == -1 ? "" : s.substring(validWindowStart, validWindowStart + minLength);
     }
 }

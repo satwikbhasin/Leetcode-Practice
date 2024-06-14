@@ -1,61 +1,34 @@
+// O(n) Time, O(n) Space
 class Solution {
     public int longestConsecutive(int[] nums) {
-        Set<Integer> num_set = new HashSet<Integer>();
+        if (nums == null || nums.length == 0)
+            return 0;
+
+        HashSet<Integer> nums_set = new HashSet<>();
+
         for (int num : nums) {
-            num_set.add(num);
+            nums_set.add(num);
         }
 
-        int longestStreak = 0;
+        int longestSeq = 0;
+        for (int num : nums) {
+            if (!nums_set.contains(num - 1)) {
+                int currStreak = 1;
+                int currNum = num;
 
-        for (int num : num_set) {
-            if (!num_set.contains(num - 1)) {
-                int currentNum = num;
-                int currentStreak = 1;
-
-                while (num_set.contains(currentNum + 1)) {
-                    currentNum += 1;
-                    currentStreak += 1;
+                while (nums_set.contains(currNum + 1)) {
+                    currStreak++;
+                    currNum++;
                 }
 
-                longestStreak = Math.max(longestStreak, currentStreak);
+                longestSeq = Math.max(longestSeq, currStreak);
+
             }
         }
 
-        return longestStreak;
+        return longestSeq;
     }
 }
-
-// O(n) Time, O(n) Space
-// class Solution {
-//     public int longestConsecutive(int[] nums) {
-//         if (nums == null || nums.length == 0)
-//             return 0;
-
-//         HashSet<Integer> nums_set = new HashSet<>();
-
-//         for (int num : nums) {
-//             nums_set.add(num);
-//         }
-
-//         int longestSeq = 0;
-//         for (int num : nums) {
-//             if (!nums_set.contains(num - 1)) {
-//                 int currStreak = 1;
-//                 int currNum = num;
-
-//                 while (nums_set.contains(currNum + 1)) {
-//                     currStreak++;
-//                     currNum++;
-//                 }
-
-//                 longestSeq = Math.max(longestSeq, currStreak);
-
-//             }
-//         }
-
-//         return longestSeq;
-//     }
-// }
 
 // O(n * logn) Time, O(log n) Space
 // class Solution {

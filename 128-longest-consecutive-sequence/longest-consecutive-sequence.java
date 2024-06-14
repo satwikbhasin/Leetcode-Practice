@@ -4,7 +4,7 @@ class Solution {
         if (nums == null || nums.length == 0)
             return 0;
 
-        HashSet<Integer> nums_set = new HashSet<>();
+        Set<Integer> nums_set = new HashSet<Integer>();
 
         for (int num : nums) {
             nums_set.add(num);

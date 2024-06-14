@@ -11,7 +11,7 @@ class Solution {
 
         for (char c : ransomNote.toCharArray()) {
             if (magazineFrequency.containsKey(c)) {
-                if (magazineFrequency.get(c) < 1) {
+                if (magazineFrequency.get(c) == 0) {
                     return false;
                 }
                 magazineFrequency.put(c, magazineFrequency.get(c) - 1);

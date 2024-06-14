@@ -45,9 +45,14 @@ class Solution {
         }
 
         List<List<Integer>> sol = new ArrayList<>();
+        int added = 0;
         while (!pairPQ.isEmpty()) {
             Pair curr = pairPQ.poll();
             sol.add(curr.pair);
+            added++;
+            if(added == k){
+                break;
+            }
         }
 
         return sol;

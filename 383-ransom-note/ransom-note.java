@@ -1,3 +1,4 @@
+// O(m + n) Time, O(m) Space where m is the length of magazine and n is the length of ransom note
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         if (ransomNote.length() > magazine.length())

@@ -11,12 +11,10 @@ class Solution {
             char sChar = s.charAt(i);
             char tChar = t.charAt(i);
 
-            if (mappings.containsKey(sChar)) {
-                if (mappings.get(sChar) != tChar)
-                    return false;
+            if ((mappings.containsKey(sChar) && mappings.get(sChar) != tChar)
+                    || (reverseMappings.containsKey(tChar) && reverseMappings.get(tChar) != sChar)) {
+                return false;
             } else {
-                if (reverseMappings.containsKey(tChar) && reverseMappings.get(tChar) != sChar)
-                    return false;
                 mappings.put(sChar, tChar);
                 reverseMappings.put(tChar, sChar);
             }

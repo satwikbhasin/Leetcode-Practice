@@ -1,5 +1,4 @@
-import java.util.HashMap;
-
+// O(n) Time, O(n) Space
 class Solution {
     public boolean isIsomorphic(String s, String t) {
         if (s.length() != t.length())

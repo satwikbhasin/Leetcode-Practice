@@ -29,10 +29,8 @@ class Solution {
             sol.add(range.toString());
         } else {
             range.append(rangeStart);
-            if (rangeStart < rangeEnd) {
                 range.append("->");
                 range.append(rangeEnd);
-            }
             sol.add(range.toString());
         }
 

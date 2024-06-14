@@ -11,7 +11,7 @@ class Solution {
         }
 
         int longestSeq = 0;
-        for (int num : nums) {
+        for (int num : nums_set) {
             if (!nums_set.contains(num - 1)) {
                 int currStreak = 1;
                 int currNum = num;

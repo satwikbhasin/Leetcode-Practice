@@ -1,3 +1,4 @@
+// O(n * log n) Time, O(n) Space
 class Solution {
     private boolean isOverlapping(int[] first, int[] second) {
         return first[1] >= second[0];
@@ -25,6 +26,6 @@ class Solution {
 
         sol.add(new int[] { min, max });
 
-        return sol.toArray(new int[0][]);
+        return sol.toArray(new int[sol.size()][]);
     }
 }

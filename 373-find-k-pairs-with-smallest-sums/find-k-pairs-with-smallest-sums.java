@@ -27,6 +27,10 @@ class Solution {
     }
 
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> sol = new ArrayList<>();
+
+        if (nums1.length == 0 || nums2.length == 0 || k == 0)
+            return sol;
 
         PriorityQueue<Pair> pairPQ = new PriorityQueue<>((a, b) -> (b.sum - a.sum));
         for (int i = 0; i < Math.min(nums1.length, k); i++) {
@@ -44,15 +48,8 @@ class Solution {
             }
         }
 
-        List<List<Integer>> sol = new ArrayList<>();
-        int added = 0;
         while (!pairPQ.isEmpty()) {
-            Pair curr = pairPQ.poll();
-            sol.add(curr.pair);
-            added++;
-            if(added == k){
-                break;
-            }
+            sol.add(pairPQ.poll().pair);
         }
 
         return sol;

@@ -20,14 +20,16 @@ class Solution {
     }
 
     public int rob(int[] nums) {
-        if(nums.length == 1){
+        if (nums.length < 0)
+            return 0;
+        else if (nums.length == 1)
             return nums[0];
-        }
 
         dp = new int[nums.length + 1];
 
         Arrays.fill(dp, -1);
-        int max1 = dp(nums, 0, nums.length - 2); // if you start robbing from the 1st house, you cannot rob the last house
+        int max1 = dp(nums, 0, nums.length - 2); // if you start robbing from the 1st house, you cannot rob the last
+                                                 // house
 
         Arrays.fill(dp, -1);
         int max2 = dp(nums, 1, nums.length - 1); // if you start robbing from the 2nd house, you can rob the last house

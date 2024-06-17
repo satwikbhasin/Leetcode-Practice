@@ -6,8 +6,7 @@ class Solution {
             return 0;
         }
 
-        // Construct a key based on the node's identity and include/exclude state
-        String key = node + "_" + include;
+        String key = node + "-" + include;
         if (memo.containsKey(key)) {
             return memo.get(key);
         }

@@ -21,7 +21,6 @@ class Solution {
             profit = profitExcludingCurr;
         }
 
-        // Store the result in the memoization hashmap
         memo.put(key, profit);
         return profit;
     }

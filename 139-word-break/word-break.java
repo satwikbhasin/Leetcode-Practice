@@ -1,32 +1,34 @@
-import java.util.List;
-
 class Solution {
-    private boolean dfs(String remainingString, List<String> wordDict, Map<String, Boolean> memo) {
-        if (wordDict.contains(remainingString)) {
+    HashSet<String> wordSet;
+    HashMap<String, Boolean> memo;
+
+    private boolean dfs(String remaining) {
+
+        if (remaining.length() == 0) {
             return true;
         }
 
-        if (memo.containsKey(remainingString)) {
-            return memo.get(remainingString);
+        if (memo.containsKey(remaining)) {
+            return memo.get(remaining);
         }
 
-        for (int i = 1; i < remainingString.length(); i++) {
-            String substring = remainingString.substring(0, i);
-            if (wordDict.contains(substring)) {
-                String newRemainingString = remainingString.substring(i);
-                if (!memo.containsKey(newRemainingString)
-                        && dfs(newRemainingString, wordDict, memo)) {
-                    memo.put(remainingString, false);
+        for (int i = 1; i <= remaining.length(); i++) {
+            String substring = remaining.substring(0, i);
+            if (wordSet.contains(substring)) {
+                if (dfs(remaining.substring(i))) {
+                    memo.put(remaining.substring(i), true);
                     return true;
                 }
             }
         }
-        memo.put(remainingString, false);
+        
+        memo.put(remaining, false);
         return false;
     }
 
     public boolean wordBreak(String s, List<String> wordDict) {
-        Map<String, Boolean> memo = new HashMap<>();
-        return dfs(s, wordDict, memo);
+        wordSet = new HashSet<>(wordDict);
+        memo = new HashMap<>();
+        return dfs(s);
     }
 }

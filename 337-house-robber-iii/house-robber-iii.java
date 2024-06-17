@@ -6,7 +6,7 @@ class Solution {
             return 0;
         }
 
-        String key = node + "-" + include;
+        String key = node + "#" + include;
         if (memo.containsKey(key)) {
             return memo.get(key);
         }

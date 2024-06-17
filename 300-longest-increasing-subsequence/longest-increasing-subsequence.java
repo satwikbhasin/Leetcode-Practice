@@ -9,9 +9,9 @@ class Solution {
         }
 
         int longest = 1;
-        for (int nextIndex = currIndex + 1; nextIndex < nums.length; nextIndex++) {
-            if (nums[nextIndex] > nums[currIndex]) {
-                longest = Math.max(longest, 1 + dp(nums, nextIndex, dp));
+        for (int nextToCurr = currIndex + 1; nextToCurr < nums.length; nextToCurr++) {
+            if (nums[nextToCurr] > nums[currIndex]) {
+                longest = Math.max(longest, 1 + dp(nums, nextToCurr, dp));
             }
         }
 
@@ -27,6 +27,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             longest = Math.max(longest, dp(nums, i, dp));
         }
+
         return longest;
     }
 }

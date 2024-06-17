@@ -1,4 +1,5 @@
 class Solution {
+    int[] dp;
 
     private int robHouses(int[] nums, int pos, int k, int possibleCapability, int[] dp) {
         if (k == 0) {
@@ -26,9 +27,10 @@ class Solution {
     }
 
     private boolean isPossible(int[] nums, int k, int possibleCapability) {
-        int[] dp = new int[nums.length];
+        dp = new int[nums.length];
         Arrays.fill(dp, -1);
         int maxRobbed = robHouses(nums, 0, k, possibleCapability, dp);
+        Arrays.fill(dp, -1);
         return maxRobbed >= k;
     }
 

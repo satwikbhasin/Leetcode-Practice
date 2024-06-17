@@ -1,16 +1,16 @@
 class Solution {
 
     private boolean isPossible(int[] nums, int k, int possibleCapability) {
-        int[] dp = new int[nums.length + 2];
-        for (int i = nums.length - 1; i >= 0; i--) {
-            if (nums[i] > possibleCapability) {
-                dp[i] = dp[i + 1];
-            } else {
-                dp[i] = Math.max(dp[i + 2] + 1, dp[i + 1]);
-            }
+        int prev1 = 0;
+        int prev2 = 0;
 
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int current = nums[i] > possibleCapability ? prev1 : prev2 + 1;
+            prev2 = prev1;
+            prev1 = current;
         }
-        return dp[0] >= k;
+
+        return prev1 >= k;
     }
 
     public int minCapability(int[] nums, int k) {

@@ -1,27 +1,22 @@
 class Solution {
-    private int dp(int[] coins, int amountLeft, int[] count) {
-        if (amountLeft < 0)
-            return -1;
-        if (amountLeft == 0)
+    public int coinChange(int[] coins, int amount) {
+        if (amount < 1) {
             return 0;
-        if (count[amountLeft - 1] != 0)
-            return count[amountLeft - 1];
-        int min = Integer.MAX_VALUE;
-
-        for (int coin : coins) {
-            int res = dp(coins, amountLeft - coin, count);
-            if (res >= 0 && res < min)
-                min = 1 + res;
         }
 
-        count[amountLeft - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+        int dp[] = new int[amount + 1];
 
-        return count[amountLeft - 1];
-    }
+        Arrays.fill(dp, Integer.MAX_VALUE);
 
-    public int coinChange(int[] coins, int amount) {
-        if (amount < 1)
-            return 0;
-        return dp(coins, amount, new int[amount]);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i && dp[i - coins[j]] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
     }
 }

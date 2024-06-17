@@ -1,10 +1,10 @@
 // O(n) Time, O(n) Space, BOTTOM-UP DP
 class Solution {
     public int climbStairs(int n) {
-        if(n < 2){
+        if (n <= 2) {
             return n;
         }
-        
+
         int[] ways = new int[n];
 
         ways[0] = 1;

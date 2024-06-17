@@ -1,37 +1,17 @@
 class Solution {
-    int[] dp;
-
-    private int robHouses(int[] nums, int pos, int k, int possibleCapability, int[] dp) {
-        if (k == 0) {
-            return 0;
-        }
-
-        if (pos >= nums.length) {
-            return Integer.MIN_VALUE;
-        }
-
-        if (dp[pos] != -1) {
-            return dp[pos];
-        }
-
-        if (nums[pos] > possibleCapability) {
-            return robHouses(nums, pos + 1, k, possibleCapability, dp);
-        }
-
-        dp[pos] = Math.max(
-                1 + robHouses(nums, pos + 2, k - 1, possibleCapability, dp),
-                robHouses(nums, pos + 1, k, possibleCapability, dp));
-
-        return dp[pos];
-
-    }
 
     private boolean isPossible(int[] nums, int k, int possibleCapability) {
-        dp = new int[nums.length];
-        Arrays.fill(dp, -1);
-        int maxRobbed = robHouses(nums, 0, k, possibleCapability, dp);
-        Arrays.fill(dp, -1);
-        return maxRobbed >= k;
+        int robNext = 0;
+        int robNextPlusOne = 0;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int curr = nums[i] > possibleCapability ? robNext : robNextPlusOne + 1;
+
+            robNextPlusOne = robNext;
+            robNext = curr;
+        }
+
+        return robNext >= k;
     }
 
     public int minCapability(int[] nums, int k) {

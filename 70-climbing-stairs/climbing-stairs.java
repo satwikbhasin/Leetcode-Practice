@@ -1,29 +1,31 @@
 class Solution {
-    int[] visited;
+    int[] ways;
+    int totalWays;
 
-    private int dp(int currStep, int totalSteps) {
-        if(currStep > totalSteps){
-            return 0;
-        }
-
-        if (currStep == totalSteps) {
+    private int dp(int n) {
+        if (n == 0) {
             return 1;
         }
 
-        if(visited[currStep] != -1){
-            return visited[currStep];
+        if(n < 0){
+            return 0;
         }
 
-        int totalWays = dp(currStep + 1, totalSteps) + dp(currStep + 2, totalSteps);
+        if (ways[n] != -1) {
+            return ways[n];
+        }
 
-        visited[currStep] = totalWays;
+        int waysFromHere = dp(n - 1) + dp(n - 2);
 
-        return totalWays;
+        ways[n] = waysFromHere;
+
+        return waysFromHere;
     }
 
     public int climbStairs(int n) {
-        visited = new int[n];
-        Arrays.fill(visited, -1);
-        return dp(0, n);
+        totalWays = 0;
+        ways = new int[n + 1];
+        Arrays.fill(ways, -1);
+        return dp(n);
     }
 }

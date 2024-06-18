@@ -21,8 +21,13 @@ class Solution {
             curr = next;
         }
 
-        before.next.next = curr;
-        before.next = prev;
+        while(prev != null){
+            before.next = prev;
+            before = before.next;
+            prev = prev.next;
+        }
+
+        before.next = curr;
 
         return dummy.next;
     }

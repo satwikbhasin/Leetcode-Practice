@@ -1,18 +1,20 @@
-// O(n) Time, O(1) Space
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int totalGas = 0, currentGas = 0, startIndex = 0;
+        int gasStationCount = gas.length;
+        int netGas = 0;
+        int currGas = 0;
+        int startingStation = 0;
 
-        for (int i = 0; i < gas.length; i++) {
-            totalGas += gas[i] - cost[i];
-            currentGas += gas[i] - cost[i];
+        for (int i = 0; i < gasStationCount; i++) {
+            currGas += gas[i] - cost[i];
+            netGas += gas[i] - cost[i];
 
-            if (currentGas < 0) {
-                startIndex = i + 1;
-                currentGas = 0;
+            if (currGas < 0) {
+                currGas = 0;
+                startingStation = i + 1;
             }
         }
 
-        return totalGas >= 0 ? startIndex : -1;
+        return netGas < 0 ? -1 : startingStation;
     }
 }

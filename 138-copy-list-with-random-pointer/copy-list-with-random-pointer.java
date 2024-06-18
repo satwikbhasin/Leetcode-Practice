@@ -28,14 +28,16 @@ class Solution {
     }
 
     public Node copyRandomList(Node head) {
-        if(head == null) return null;
+        if (head == null)
+            return null;
 
         visited = new HashMap<>();
 
         Node old = head;
-        Node newNode = getClonedNode(old);
+        Node newNode = null;
 
         while (old != null) {
+            newNode = getClonedNode(old);
             newNode.random = getClonedNode(old.random);
             newNode.next = getClonedNode(old.next);
 

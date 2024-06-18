@@ -20,16 +20,12 @@ class Solution {
             revList.add(stack.pop());
         }
 
-        if(revList.isEmpty()){
-            return "/";
-        }
-
         StringBuilder canonicalPath = new StringBuilder();
         for (int i = revList.size() - 1; i >= 0; i--) {
             canonicalPath.append("/");
             canonicalPath.append(revList.get(i));
         }
 
-        return canonicalPath.toString();
+        return canonicalPath.length() > 0 ? canonicalPath.toString() : "/";
     }
 }

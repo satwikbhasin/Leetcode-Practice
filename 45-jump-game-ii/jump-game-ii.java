@@ -10,6 +10,9 @@ class Solution {
             if (i == currentMaxReach) {
                 minJumps++;
                 currentMaxReach = nextMaxReach;
+
+                if (currentMaxReach >= nums.length - 1)
+                    break;
             }
         }
 

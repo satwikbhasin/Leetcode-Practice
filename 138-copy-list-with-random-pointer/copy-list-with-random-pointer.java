@@ -13,6 +13,7 @@ class Node {
 }
 */
 
+// O(n) Time, O(n) Space
 class Solution {
     HashMap<Node, Node> visited;
 
@@ -34,10 +35,9 @@ class Solution {
         visited = new HashMap<>();
 
         Node old = head;
-        Node newNode = null;
+        Node newNode = getClonedNode(old);
 
         while (old != null) {
-            newNode = getClonedNode(old);
             newNode.random = getClonedNode(old.random);
             newNode.next = getClonedNode(old.next);
 

@@ -10,8 +10,6 @@ class Solution {
             }
         }
 
-        System.out.println(indexPossibilities);
-
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
         seenWords.add(beginWord);

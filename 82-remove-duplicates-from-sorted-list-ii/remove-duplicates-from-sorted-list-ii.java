@@ -13,7 +13,7 @@ class Solution {
         ListNode curr = head;
 
         ListNode ans = new ListNode(0);
-        ListNode cpy = ans;
+        ListNode ansCurr = ans;
 
         while (curr != null) {
             boolean duplicateFound = false;
@@ -23,8 +23,8 @@ class Solution {
                 curr = curr.next;
             }
             if (!duplicateFound) {
-                cpy.next = new ListNode(curr.val);
-                cpy = cpy.next;
+                ansCurr.next = new ListNode(curr.val);
+                ansCurr = ansCurr.next;
             }
 
             curr = curr.next;

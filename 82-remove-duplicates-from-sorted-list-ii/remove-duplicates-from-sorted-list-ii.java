@@ -10,8 +10,7 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        ListNode dummy = head;
-        ListNode curr = dummy;
+        ListNode curr = head;
 
         ListNode ans = new ListNode(0);
         ListNode cpy = ans;

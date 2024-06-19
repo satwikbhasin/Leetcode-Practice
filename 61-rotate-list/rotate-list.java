@@ -20,9 +20,7 @@ class Solution {
             count = count.next;
         }
 
-        System.out.println("Total nodes: " + totalNodes);
         int newHeadPos = totalNodes - (k % totalNodes);
-        System.out.println("New head position: " + newHeadPos);
 
         ListNode afterHead = head;
         ListNode afterTail = afterHead;

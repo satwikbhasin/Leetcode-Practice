@@ -4,40 +4,28 @@ class Solution {
             return head;
 
         ListNode count = head;
-        int totalNodes = 0;
-
-        while (count != null) {
+        int totalNodes = 1;
+        while (count.next != null) {
             totalNodes++;
-
-            // reached the end
-            if (count.next == null) {
-                if (k % totalNodes == 0)
-                    return head;
-                count.next = head;
-                break;
-            }
-
             count = count.next;
         }
 
-        int newHeadPos = totalNodes - (k % totalNodes);
+        k %= totalNodes;
 
-        ListNode afterHead = head;
-        ListNode afterTail = afterHead;
+        if (k == 0)
+            return head;
 
+        int newHeadPos = totalNodes - k;
+
+        ListNode newTail = head;
         for (int i = 1; i < newHeadPos; i++) {
-            afterTail = afterTail.next;
+            newTail = newTail.next;
         }
 
-        ListNode beforeHead = afterTail.next;
-        ListNode beforeTail = beforeHead;
-        afterTail.next = null;
+        ListNode newHead = newTail.next;
+        newTail.next = null;
+        count.next = head;
 
-        for (int i = 0; i < totalNodes - newHeadPos - 1; i++) {
-            beforeTail = beforeTail.next;
-        }
-        beforeTail.next = afterHead;
-
-        return beforeHead;
+        return newHead;
     }
 }

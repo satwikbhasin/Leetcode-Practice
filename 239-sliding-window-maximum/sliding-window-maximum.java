@@ -1,48 +1,29 @@
-// class Solution {
-//     public int[] maxSlidingWindow(int[] nums, int k) {
-//         if (nums == null)
-//             return null;
-
-//         int totalSlidingWindows = nums.length - k;
-//         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
-
-//         int[] res = new int[totalSlidingWindows + 1];
-//         int pqCounter = 0;
-//         for (int i = 0; i <= totalSlidingWindows; i++) {
-//             for (int j = i; j < i + k; j++) {
-//                 pq.add(nums[j]);
-//             }
-//             res[pqCounter] = pq.poll();
-//             pqCounter++;
-//             pq.clear();
-//         }
-//         return res;
-//     }
-// }
-
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || nums.length == 0)
-            return new int[0];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> (b[0] - a[0]));
+        int totalWindows = nums.length - k + 1;
 
-        int n = nums.length;
-        int[] res = new int[n - k + 1];
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> (b[0] - a[0]));
+        int[] result = new int[totalWindows];
+        int ptr = 0;
 
         for (int i = 0; i < k; i++) {
-            pq.offer(new int[]{nums[i], i});
+            pq.offer(new int[] { nums[i], i });
         }
-        res[0] = pq.peek()[0];
 
-        for (int i = k; i < n; i++) {
-            pq.offer(new int[]{nums[i], i});
+        result[ptr++] = pq.peek()[0];
 
-            while (pq.peek()[1] <= i - k) {
+        for (int right = k; right < nums.length; right++) {
+            int left = right - k;
+            pq.offer(new int[] { nums[right], right });
+
+            while (pq.peek()[1] <= left) {
                 pq.poll();
             }
 
-            res[i - k + 1] = pq.peek()[0];
+            result[ptr++] = pq.peek()[0];
         }
-        return res;
+
+        return result;
+
     }
 }

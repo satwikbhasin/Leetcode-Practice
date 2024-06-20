@@ -1,3 +1,4 @@
+// O(1) All Operations
 class LRUCache {
 
     private class Node {

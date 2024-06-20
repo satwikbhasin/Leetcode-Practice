@@ -9,42 +9,41 @@
  * }
  */
 class Solution {
-    public class ListMetaData {
-        ListNode node;
-        int val;
+    private class ListState {
+        int currVal;
+        ListNode pointer;
 
-        public ListMetaData(ListNode node, int val) {
-            this.node = node;
-            this.val = val;
+        ListState(ListNode pointer) {
+            this.pointer = pointer;
+            this.currVal = this.pointer.val;
         }
+
     }
 
     public ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null || lists.length == 0)
-            return null;
+        PriorityQueue<ListState> pq = new PriorityQueue<>((a, b) -> (a.currVal - b.currVal));
 
-        PriorityQueue<ListMetaData> pq = new PriorityQueue<>((a, b) -> (a.val - b.val));
+        ListNode curr = new ListNode(0);
+        ListNode ans = curr;
 
-        for (int i = 0; i < lists.length; i++) {
-            if (lists[i] != null) {
-                pq.add(new ListMetaData(lists[i], lists[i].val));
+        for (ListNode list : lists) {
+            if (list != null) {
+                ListState listState = new ListState(list);
+                pq.offer(listState);
             }
         }
-
-        ListNode dummy = new ListNode(0);
-        ListNode current = dummy;
 
         while (!pq.isEmpty()) {
-
-            ListMetaData metaData = pq.poll();
-            current.next = metaData.node;
-            current = current.next;
-
-            if (metaData.node.next != null) {
-                pq.add(new ListMetaData(metaData.node.next, metaData.node.next.val));
+            ListNode currSmallest = pq.poll().pointer;
+            curr.next = currSmallest;
+            curr = curr.next;
+            currSmallest = currSmallest.next;
+            if (currSmallest != null) {
+                ListState updatedState = new ListState(currSmallest);
+                pq.offer(updatedState);
             }
         }
 
-        return dummy.next;
+        return ans.next;
     }
 }

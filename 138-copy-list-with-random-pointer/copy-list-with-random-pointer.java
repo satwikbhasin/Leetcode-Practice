@@ -13,38 +13,35 @@ class Node {
 }
 */
 
-// O(n) Time, O(n) Space
 class Solution {
-    HashMap<Node, Node> visited;
+    private HashMap<Node, Node> cloned;
 
-    private Node getClonedNode(Node node) {
+    private Node cloneNode(Node node) {
         if (node == null)
             return null;
 
-        if (!visited.containsKey(node)) {
-            visited.put(node, new Node(node.val));
+        if (!cloned.containsKey(node)) {
+            cloned.put(node, new Node(node.val));
         }
 
-        return visited.get(node);
+        return cloned.get(node);
     }
 
     public Node copyRandomList(Node head) {
         if (head == null)
             return null;
 
-        visited = new HashMap<>();
+        cloned = new HashMap<>();
 
-        Node old = head;
-        Node newNode = getClonedNode(old);
+        Node oldHead = head;
 
-        while (old != null) {
-            newNode.random = getClonedNode(old.random);
-            newNode.next = getClonedNode(old.next);
-
-            old = old.next;
-            newNode = newNode.next;
+        while (oldHead != null) {
+            Node clonedNode = cloneNode(oldHead);
+            clonedNode.random = cloneNode(oldHead.random);
+            clonedNode.next = cloneNode(oldHead.next);
+            oldHead = oldHead.next;
         }
 
-        return visited.get(head);
+        return cloned.get(head);
     }
 }

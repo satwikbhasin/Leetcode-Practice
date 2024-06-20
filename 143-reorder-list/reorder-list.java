@@ -41,5 +41,6 @@ class Solution {
             second.next = first;
             second = temp;
         }
+
     }
 }

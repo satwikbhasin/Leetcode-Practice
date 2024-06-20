@@ -1,29 +1,20 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
-        TreeSet<Integer> set = new TreeSet<>();
+        int n = nums.length;
+        boolean[] seen = new boolean[n + 1];
 
-        for (int num : nums) {
-            if (num > 0) {
-                set.add(num);
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] > 0 && nums[i] <= n){
+                seen[nums[i]] = true;
             }
         }
 
-        if (set.size() == 0)
-            return 1;
-
-        int missingPositive = 1;
-
-        if (set.first() > 1) {
-            return 1;
-        }
-
-        for (int num : set) {
-            if (num != missingPositive) {
-                return missingPositive;
+        for(int i = 1; i <= n; i++){
+            if(!seen[i]){
+                return i;
             }
-            missingPositive++;
         }
 
-        return missingPositive;
+        return n + 1;
     }
 }

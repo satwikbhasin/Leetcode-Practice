@@ -3,63 +3,65 @@ class MaxStack {
     private class Node {
         int val;
         Node prev, next;
-        int timeStamp;
 
-        Node(int val, int timeStamp) {
+        Node(int val) {
             this.val = val;
-            this.timeStamp = timeStamp;
         }
 
     }
 
-    private PriorityQueue<Node> pq;
+    private TreeMap<Integer, Stack<Node>> map;
     private Node head;
     private Node tail;
-    private int timeStamp;
 
     public MaxStack() {
-        this.pq = new PriorityQueue<>((a, b) -> {
-            if (a.val != b.val) {
-                return Integer.compare(b.val, a.val); // Compare values in descending order
-            } else {
-                return Integer.compare(b.timeStamp, a.timeStamp); // Compare timestamps in descending order for
-                                                                  // duplicates
-            }
-        });
-
-        this.head = new Node(0, 0);
-        this.tail = new Node(0, 0);
+        this.map = new TreeMap<>();
+        this.head = new Node(0);
+        this.tail = new Node(0);
         head.next = tail;
         tail.prev = head;
-        this.timeStamp = 0;
     }
 
+    // O(log n)
     public void push(int x) {
-        Node newNode = new Node(x, timeStamp++);
-        pq.offer(newNode);
+        Node newNode = new Node(x);
+        map.computeIfAbsent(x, k -> new Stack<>()).push(newNode);
         insertNode(newNode);
     }
 
+    // O(log n)
     public int pop() {
         Node removedNode = popNode();
-        pq.remove(removedNode);
-        return removedNode.val;
+        int removedNodeVal = removedNode.val;
+        map.get(removedNodeVal).pop();
+        if (map.get(removedNodeVal).isEmpty()) {
+            map.remove(removedNodeVal);
+        }
+        return removedNodeVal;
     }
 
+    // O(1)
     public int top() {
         return tail.prev.val;
     }
 
+    // O(log n)
     public int peekMax() {
-        return pq.peek().val;
+        return map.lastKey();
     }
 
+    // O(log n)
     public int popMax() {
-        Node maxNode = pq.poll();
+        int maxVal = map.lastKey();
+        Node maxNode = map.get(maxVal).pop();
+        if (map.get(maxVal).isEmpty()) {
+            map.remove(maxVal);
+        }
         removeNode(maxNode);
-        return maxNode.val;
+        return maxVal;
     }
 
+    // O(1)
     private void insertNode(Node node) {
         tail.prev.next = node;
         node.prev = tail.prev;
@@ -67,6 +69,7 @@ class MaxStack {
         tail.prev = node;
     }
 
+    // O(1)
     private Node popNode() {
         Node removedNode = tail.prev;
         removedNode.prev.next = tail;
@@ -74,6 +77,7 @@ class MaxStack {
         return removedNode;
     }
 
+    // O(1)
     private void removeNode(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;

@@ -1,35 +1,44 @@
 class Solution {
-    private void dfs(char[][] grid, int x, int y){
-        if(x < 0 || y < 0 || x >= grid.length || y >= grid[0].length){
-            return;
-        }
+    int[][] DIRECTIONS = new int[][] { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
 
-        if(grid[x][y] == '0'){
-            return;
-        }
+    private void bfs(int[] island, char[][] grid) {
+        Queue<int[]> queue = new LinkedList<>();
+        grid[island[0]][island[1]] = '0';
+        queue.offer(island);
 
-        grid[x][y] = '0';
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            int x = cell[0];
+            int y = cell[1];
+            for (int[] direction : DIRECTIONS) {
+                int newX = x + direction[0];
+                int newY = y + direction[1];
 
-        dfs(grid, x + 1, y);
-        dfs(grid, x, y + 1);
-        dfs(grid, x - 1, y);
-        dfs(grid, x, y - 1);
-    }
-
-    public int numIslands(char[][] grid) {
-        if(grid == null || grid.length == 0){
-            return 0;
-        }
-
-        int count = 0;
-        for(int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid[0].length; j++){
-                if(grid[i][j] == '1'){
-                    count++;
-                    dfs(grid, i, j);
+                if (newX >= 0 && newX < grid.length && newY >= 0 && newY < grid[0].length
+                        && grid[newX][newY] == '1') {
+                    queue.offer(new int[] { newX, newY });
+                    grid[newX][newY] = '0';
                 }
             }
         }
-        return count;
+    }
+
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+
+        int islandCount = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    bfs(new int[] { i, j }, grid);
+                    islandCount++;
+                }
+            }
+        }
+
+        return islandCount;
     }
 }

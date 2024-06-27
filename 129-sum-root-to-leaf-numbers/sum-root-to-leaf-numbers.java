@@ -20,7 +20,7 @@ class Solution {
         if (node == null) {
             return;
         }
-        
+
         currNum.append(node.val);
 
         if (node.left == null && node.right == null) {

@@ -16,7 +16,7 @@ class Solution {
 
     private void dfs(int strLength, String digits, StringBuilder currString, int currLength) {
         if (currLength == strLength) {
-            result.add(new String(currString.toString()));
+            result.add(currString.toString());
             return;
         }
 
@@ -38,7 +38,7 @@ class Solution {
         }
 
         int strLength = digits.length();
-        
+
         initializeDictionary();
 
         dfs(strLength, digits, new StringBuilder(), 0);

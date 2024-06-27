@@ -26,7 +26,7 @@ class Solution {
         }
 
         int m = grid.length, n = grid[0].length;
-        int[] islandSizes = new int[m * n + 2];
+        HashMap<Integer, Integer> islandAreaMap = new HashMap<>();
 
         int areaOfLargestIsland = 0;
         boolean[][] visited = new boolean[m][n];
@@ -35,8 +35,8 @@ class Solution {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1 && !visited[i][j]) {
-                    islandSizes[islandIndex] = dfs(grid, i, j, visited, islandIndex);
-                    areaOfLargestIsland = Math.max(areaOfLargestIsland, islandSizes[islandIndex]);
+                    islandAreaMap.put(islandIndex, dfs(grid, i, j, visited, islandIndex));
+                    areaOfLargestIsland = Math.max(areaOfLargestIsland, islandAreaMap.get(islandIndex));
                     islandIndex++;
                 }
             }
@@ -60,7 +60,7 @@ class Solution {
                     }
                     int currArea = 1;
                     for (int index : connectedIslands) {
-                        currArea += islandSizes[index];
+                        currArea += islandAreaMap.get(index);
                     }
                     areaOfLargestIsland = Math.max(areaOfLargestIsland, currArea);
                 }

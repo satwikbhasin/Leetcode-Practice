@@ -13,13 +13,9 @@ class Solution {
             }
         }
 
-        while (ptr1 < 0 && ptr2 >= 0) {
+        while (ptr2 >= 0) {
             nums1[resultPtr--] = nums2[ptr2--];
         }
-
-        // while (ptr2 < 0 && ptr1 >= 0) {
-        //     nums1[resultPtr--] = nums1[ptr1--];
-        // }
     }
 }
 

@@ -24,16 +24,15 @@ class Solution {
             map.get(root.val).add(root.left.val);
             map.computeIfAbsent(root.left.val, k -> new HashSet<Integer>());
             map.get(root.left.val).add(root.val);
+            convertTreeToGraph(root.left, map);
         }
 
         if (root.right != null) {
             map.get(root.val).add(root.right.val);
             map.computeIfAbsent(root.right.val, k -> new HashSet<Integer>());
             map.get(root.right.val).add(root.val);
+            convertTreeToGraph(root.right, map);
         }
-
-        convertTreeToGraph(root.left, map);
-        convertTreeToGraph(root.right, map);
     }
 
     public int amountOfTime(TreeNode root, int start) {

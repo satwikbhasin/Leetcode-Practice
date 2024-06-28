@@ -11,22 +11,16 @@ class Solution {
             return true;
         }
 
-        if (!boardCharCount.containsKey(word.charAt(index)) || boardCharCount.get(word.charAt(index)) == 0) {
-            return false;
-        }
-
         for (int[] direction : DIRECTIONS) {
             int newX = x + direction[0];
             int newY = y + direction[1];
 
             if (newX >= 0 && newY >= 0 && newX < board.length && newY < board[0].length && !used[newX][newY]
                     && board[newX][newY] == word.charAt(index)) {
-                boardCharCount.put(word.charAt(index), boardCharCount.get(word.charAt(index)) - 1);
                 used[newX][newY] = true;
                 if (dfs(index + 1, newX, newY, used)) {
                     return true;
                 }
-                boardCharCount.put(word.charAt(index), boardCharCount.get(word.charAt(index)) + 1);
                 used[newX][newY] = false;
             }
         }
@@ -52,12 +46,22 @@ class Solution {
             }
         }
 
+        Map<Character, Integer> wordCharCount = new HashMap<>();
+        for (char c : word.toCharArray()) {
+            wordCharCount.put(c, wordCharCount.getOrDefault(c, 0) + 1);
+        }
+
+        for (char c : wordCharCount.keySet()) {
+            if (wordCharCount.get(c) > boardCharCount.getOrDefault(c, 0)) {
+                return false;
+            }
+        }
+
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 char currChar = board[i][j];
                 if (currChar == word.charAt(0)) {
                     boolean[][] used = new boolean[board.length][board[0].length];
-                    boardCharCount.put(currChar, boardCharCount.get(currChar) - 1);
 
                     used[i][j] = true;
 
@@ -65,7 +69,6 @@ class Solution {
                         return true;
                     }
 
-                    boardCharCount.put(currChar, boardCharCount.get(currChar) + 1);
                 }
             }
         }

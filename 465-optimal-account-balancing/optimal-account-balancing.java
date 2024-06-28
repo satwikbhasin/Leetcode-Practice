@@ -35,11 +35,23 @@ class Solution {
         }
 
         List<Integer> debts = new ArrayList<>();
+        int neg = 0;
+        int pos = 0;
 
         for (int balance : accounts.values()) {
             if (balance != 0) {
                 debts.add(balance);
+                if (balance < 0) {
+                    neg += balance;
+                }
+                if (balance > 0) {
+                    pos += balance;
+                }
             }
+        }
+
+        if(neg + pos != 0){
+            return -1;
         }
 
         return dfs(debts, 0);

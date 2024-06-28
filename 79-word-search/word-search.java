@@ -23,11 +23,14 @@ class Solution {
             }
         }
 
-
         return false;
     }
 
     public boolean exist(char[][] board, String word) {
+        if (board == null || board.length * board[0].length < word.length()) {
+            return false;
+        }
+
         this.board = board;
         this.word = word;
 

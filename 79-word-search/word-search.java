@@ -2,6 +2,8 @@ class Solution {
     int[][] DIRECTIONS = new int[][] { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
     char[][] board;
     String word;
+    int n, m;
+    Map<Character, Integer> boardCharCount;
 
     private boolean dfs(int index, int x, int y, boolean[][] used) {
 
@@ -33,12 +35,28 @@ class Solution {
 
         this.board = board;
         this.word = word;
+        this.n = board.length;
+        this.m = board[0].length;
+        this.boardCharCount = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                char c = board[i][j];
+                boardCharCount.put(c, boardCharCount.getOrDefault(c, 0) + 1);
+            }
+        }
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == word.charAt(0)) {
-
+                char currChar = board[i][j];
+                if (currChar == word.charAt(0)) {
                     boolean[][] used = new boolean[board.length][board[0].length];
+                    if (boardCharCount.containsKey(currChar)) {
+                        boardCharCount.put(currChar, boardCharCount.get(currChar) - 1);
+                    } else {
+                        return false;
+                    }
+
                     used[i][j] = true;
 
                     if (dfs(1, i, j, used)) {

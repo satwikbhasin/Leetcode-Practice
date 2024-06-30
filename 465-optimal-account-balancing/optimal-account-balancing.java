@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     
     private Map<String, Integer> memo;
@@ -15,7 +13,7 @@ class Solution {
             return 0;
         }
 
-        // Create a key for the current state using a more structured approach
+        // Create a key for the current state
         String key = generateKey(debts, idx);
         
         // Check if the result for this state is already computed
@@ -42,14 +40,13 @@ class Solution {
 
     private String generateKey(List<Integer> debts, int idx) {
         // Generate a key for the current state
-        List<Integer> currentState = new ArrayList<>();
+        StringBuilder keyBuilder = new StringBuilder();
         for (int i = idx; i < debts.size(); i++) {
             if (debts.get(i) != 0) {
-                currentState.add(debts.get(i));
+                keyBuilder.append(debts.get(i)).append(',');
             }
         }
-        Collections.sort(currentState);
-        return currentState.toString();
+        return keyBuilder.toString();
     }
 
     public int minTransfers(int[][] transactions) {

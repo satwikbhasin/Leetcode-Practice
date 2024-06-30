@@ -3,11 +3,10 @@ class Solution {
     HashSet<List<Integer>> sets;
 
     private void dfs(int[] nums, int idx, ArrayList<Integer> subset) {
-        List<Integer> sortedSubset = new ArrayList<>(subset);
-        Collections.sort(sortedSubset);
-        if (!sets.contains(sortedSubset)) {
-            result.add(sortedSubset);
-            sets.add(sortedSubset);
+        if (!sets.contains(subset)) {
+            List<Integer> curr = new ArrayList<>(subset);
+            result.add(curr);
+            sets.add(curr);
         }
 
         for (int i = idx; i < nums.length; i++) {
@@ -18,6 +17,7 @@ class Solution {
     }
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
         result = new ArrayList<>();
         sets = new HashSet<>();
         dfs(nums, 0, new ArrayList<Integer>());

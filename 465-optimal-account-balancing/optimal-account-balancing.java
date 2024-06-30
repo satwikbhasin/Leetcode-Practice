@@ -1,5 +1,4 @@
 class Solution {
-    HashMap<Integer, Integer> accounts;
 
     private int dfs(List<Integer> debts, int idx) {
         while (idx < debts.size() && debts.get(idx) == 0) {
@@ -23,35 +22,23 @@ class Solution {
     }
 
     public int minTransfers(int[][] transactions) {
-        accounts = new HashMap<>();
+        HashMap<Integer, Integer> accounts = new HashMap<>();
 
-        for (int[] t : transactions) {
-            int from = t[0];
-            int to = t[1];
-            int amount = t[2];
+        for (int[] transaction : transactions) {
+            int from = transaction[0];
+            int to = transaction[1];
+            int amount = transaction[2];
 
             accounts.put(from, accounts.getOrDefault(from, 0) - amount);
             accounts.put(to, accounts.getOrDefault(to, 0) + amount);
         }
 
         List<Integer> debts = new ArrayList<>();
-        int neg = 0;
-        int pos = 0;
 
-        for (int balance : accounts.values()) {
-            if (balance != 0) {
-                debts.add(balance);
-                if (balance < 0) {
-                    neg += balance;
-                }
-                if (balance > 0) {
-                    pos += balance;
-                }
+        for (int account : accounts.values()) {
+            if (account != 0) {
+                debts.add(account);
             }
-        }
-
-        if(neg + pos != 0){
-            return -1;
         }
 
         return dfs(debts, 0);

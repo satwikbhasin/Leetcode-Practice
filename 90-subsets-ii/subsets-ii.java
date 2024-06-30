@@ -10,6 +10,9 @@ class Solution {
         }
 
         for (int i = idx; i < nums.length; i++) {
+            if (i != idx && nums[i] == nums[i - 1]) {
+                continue;
+            }
             subset.add(nums[i]);
             dfs(nums, i + 1, subset);
             subset.remove(subset.size() - 1);

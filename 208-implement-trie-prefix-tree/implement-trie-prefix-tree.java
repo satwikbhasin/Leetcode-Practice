@@ -21,7 +21,6 @@ class Trie {
     
     public boolean search(String word) {
         Trie node = this;
-        int lengthCovered = 0;
         for(char c : word.toCharArray()){
             if(!node.children.containsKey(c)){
                 return false;

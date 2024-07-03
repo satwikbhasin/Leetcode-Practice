@@ -12,8 +12,8 @@ class Solution {
 
         while(left < right){
             if(height[left] <= height[right]){
-                if(height[left] >= leftMax) leftMax = Math.max(leftMax, height[left]);
-                else waterTrapped += leftMax - height[left];
+                leftMax = Math.max(leftMax, height[left]);
+                waterTrapped += leftMax - height[left];
                 left++;
             } else {
                 if(height[right] >= rightMax) rightMax = Math.max(rightMax, height[right]);

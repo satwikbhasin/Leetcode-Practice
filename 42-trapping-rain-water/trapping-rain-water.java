@@ -16,8 +16,8 @@ class Solution {
                 waterTrapped += leftMax - height[left];
                 left++;
             } else {
-                if(height[right] >= rightMax) rightMax = Math.max(rightMax, height[right]);
-                else waterTrapped += rightMax - height[right];
+                rightMax = Math.max(rightMax, height[right]);
+                waterTrapped += rightMax - height[right];
                 right--;
             }
         }

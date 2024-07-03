@@ -1,3 +1,4 @@
+// O(n) Time, O(1) Space
 class Solution {
     public int trap(int[] height) {
         int n = height.length;
